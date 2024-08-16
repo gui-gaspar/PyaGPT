@@ -13,4 +13,4 @@
 !/ollama/models/.gitignore
 
 .git/
-backup/
+backup/*
