@@ -1,0 +1,15 @@
+{
+    "nome": "Escola Superior de Tecnologia e Gestão Jean Piaget",
+    "historia": "Fundada em 1985, a Escola Superior de Tecnologia e Gestão Jean Piaget é uma instituição de ensino superior localizada em Almada, Portugal. Oferece uma variedade de cursos nas áreas de Tecnologia e Gestão.",
+    "cursos": [
+      "Gestão de Empresas",
+      "Engenharia Informática",
+      "Design de Comunicação"
+    ],
+    "contacto": {
+      "telefone": "+351 212 345 678",
+      "email": "info@jeanpiaget.pt",
+      "endereco": "Rua da Escola, 1, Almada, Portugal"
+    }
+  }
+  

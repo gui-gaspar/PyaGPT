@@ -1,0 +1,15 @@
+# Ignore __pycache__ directories
+/fastapi/**/__pycache__/
+/app/**/__pycache__/
+
+# Ignore VS Code configuration
+.vscode/
+
+# Ignore specific subdirectories inside app
+/app/**/utilities/
+
+# Ignore all files in ollama/models but not the directory itself
+/ollama/models/*
+!/ollama/models/.gitignore
+
+.git/

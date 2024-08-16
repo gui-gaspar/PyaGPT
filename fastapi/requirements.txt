@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+requests
+neo4j
+httpx
+toml
+openai

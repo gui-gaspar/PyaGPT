@@ -1,0 +1,12 @@
+[theme]
+base="dark"
+
+[logger]
+level = "debug"
+
+[client]
+showSidebarNavigation = false
+
+[openai]
+api_key = "ollama"
+
