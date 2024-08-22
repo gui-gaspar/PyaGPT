@@ -21,16 +21,23 @@ def main():
 
     pages = {
         "Chat": chat_page,
-        "Teste menu": multimodal_main,
         "Teste menu 2": settings_main,
-        "Teste menu 3": pdf_rag_main,  # Add the new page here
         "Login": login_main
     }
 
-    for page_name in ["Chat", "Teste menu", "Teste menu 2", "Teste menu 3"]:  # Include the new page in navigation
-        if st.sidebar.button(page_name, key=f"sidebar_button_{page_name}"):
-            st.session_state.current_page = page_name
-            st.rerun()
+    # Add conditional pages based on login status
+    if st.session_state.get('logged_in'):
+        pages.update({
+            "Teste menu": multimodal_main,
+            "Teste menu 3": pdf_rag_main
+        })
+
+    # Sidebar navigation buttons
+    for page_name in pages:
+        if page_name != "Login":
+            if st.sidebar.button(page_name, key=f"sidebar_button_{page_name}"):
+                st.session_state.current_page = page_name
+                st.rerun()
 
     st.sidebar.divider()
 
