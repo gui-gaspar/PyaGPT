@@ -4,9 +4,10 @@ import base64
 from PIL import Image
 from io import BytesIO
 import json
+from pdfminer.high_level import extract_text
 from utils import fetch_server_url, fetch_server_url_generate, get_models_info, extract_model_names
 
-def img_to_base64(image):
+def img_to_base64(image: Image.Image) -> str:
     """
     Convert an image to base64 format.
 
@@ -19,33 +20,19 @@ def img_to_base64(image):
     image.save(buffered, format="PNG")
     return base64.b64encode(buffered.getvalue()).decode()
 
-def get_allowed_model_names(models_info):
+def extract_text_from_pdf(file_upload) -> str:
     """
-    Extract allowed model names from the fetched model information.
+    Extract text from a PDF file using pdfminer.six.
 
     Args:
-        models_info: dict - Dictionary containing model information.
+        file_upload (st.UploadedFile): Streamlit file upload object containing the PDF.
+
     Returns:
-        tuple: A tuple of allowed model names.
+        str: The extracted text from the PDF.
     """
-    allowed_models = ["bakllava:latest", "llava:latest"]
-    
-    # Check if the models_info dictionary has a "data" key and that it's a list
-    if not isinstance(models_info, dict) or "data" not in models_info:
-        st.warning("Invalid model information format.")
-        return tuple()  # Return an empty tuple if the format is incorrect
-
-    # Ensure 'data' key is a list
-    if not isinstance(models_info["data"], list):
-        st.warning("The 'data' field in model information is not a list.")
-        return tuple()
-
-    model_names = [model.get("id") for model in models_info["data"] if isinstance(model, dict)]
-    return tuple(
-        model
-        for model in allowed_models
-        if model in model_names
-    )
+    pdf_bytes = file_upload.read()
+    text = extract_text(BytesIO(pdf_bytes))
+    return text
 
 def main():
     st.title("LLaVA Playground")
@@ -66,7 +53,16 @@ def main():
         st.error("Failed to fetch model list.")
         return
 
-    available_models = get_allowed_model_names(models_info)
+    # Extract model names from the fetched model information
+    if not isinstance(models_info, dict) or "data" not in models_info:
+        st.warning("Invalid model information format.")
+        return
+
+    if not isinstance(models_info["data"], list):
+        st.warning("The 'data' field in model information is not a list.")
+        return
+
+    available_models = [model.get("id") for model in models_info["data"] if isinstance(model, dict)]
     if not available_models:
         st.warning("No available models found.")
         return
@@ -79,15 +75,15 @@ def main():
     if "uploaded_file_state" not in st.session_state:
         st.session_state.uploaded_file_state = None
 
-    uploaded_file = st.file_uploader("Upload an image for analysis", type=["png", "jpg", "jpeg"])
+    uploaded_file = st.file_uploader("Upload a PDF file for analysis", type=["pdf"])
 
     col1, col2 = st.columns(2)
 
     with col2:
         if uploaded_file is not None:
             st.session_state.uploaded_file_state = uploaded_file.getvalue()
-            image = Image.open(BytesIO(st.session_state.uploaded_file_state))
-            st.image(image, caption="Uploaded image")
+            pdf_text = extract_text_from_pdf(uploaded_file)
+            st.text_area("Extracted Text", pdf_text, height=300)
 
     with col1:
         if uploaded_file is not None:
@@ -96,24 +92,24 @@ def main():
                 with st.chat_message(message["role"], avatar=avatar):
                     st.markdown(message["content"])
 
-            if user_input := st.chat_input("Question about the image...", key="chat_input"):
+            if user_input := st.chat_input("Question about the document...", key="chat_input"):
                 st.session_state.chats.append({"role": "user", "content": user_input})
                 with st.chat_message("user", avatar="🫠"):
                     st.markdown(user_input)
 
-                image_base64 = img_to_base64(image)
-                API_URL = api_url_generate  # Use the URL fetched from the server
+                API_URL = api_url_generate
                 headers = {
                     "Content-Type": "application/json",
                     "Accept": "application/json",
                 }
+                # Combine the extracted text and the user query
+                combined_prompt = f"Document text: {pdf_text}\n\nQuestion: {user_input}"
                 data = {
                     "model": selected_model,
-                    "prompt": user_input,
-                    "images": [image_base64],
+                    "prompt": combined_prompt,  # Send both the text and the question in the prompt
                 }
 
-                llava_response = ""  # Initialize llava_response to an empty string
+                llava_response = ""
 
                 with st.chat_message("assistant", avatar="🌋"):
                     with st.spinner(":blue[processing...]"):

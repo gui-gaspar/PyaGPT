@@ -3,6 +3,7 @@ from pages.chat import chat_page
 from pages.login import logout, main as login_main
 from pages.multimodal import main as multimodal_main
 from pages.settings import main as settings_main
+from pages.pdf import main as pdf_rag_main  # Import the new PDF RAG page
 
 # Set page configuration
 st.set_page_config(
@@ -22,10 +23,11 @@ def main():
         "Chat": chat_page,
         "Teste menu": multimodal_main,
         "Teste menu 2": settings_main,
+        "Teste menu 3": pdf_rag_main,  # Add the new page here
         "Login": login_main
     }
 
-    for page_name in ["Chat", "Teste menu", "Teste menu 2"]:
+    for page_name in ["Chat", "Teste menu", "Teste menu 2", "Teste menu 3"]:  # Include the new page in navigation
         if st.sidebar.button(page_name, key=f"sidebar_button_{page_name}"):
             st.session_state.current_page = page_name
             st.rerun()

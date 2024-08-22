@@ -30,6 +30,7 @@ driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
 
 # Initialize OpenAI client
 server_url = openai_secrets.get("server_url")
+server_url_generate = openai_secrets.get("server_url_generate")
 api_key = openai_secrets.get("api_key")
 client = OpenAI(
     base_url=server_url,
@@ -47,6 +48,19 @@ async def get_server_url():
         return {
             "server_url": server_url,
             "message": "This endpoint returns the server URL used for OpenAI client initialization.",
+            "status": "success"
+        }
+    except Exception as e:
+        # Handle unexpected errors
+        raise HTTPException(status_code=500, detail=f"An unexpected error occurred: {str(e)}")
+    
+@app.get("/server_url_generate")
+async def get_server_url():
+    try:
+        # Return server URL and additional info
+        return {
+            "server_url_generate": server_url_generate,
+            "message": "This endpoint provides the URL used for making generation API requests.",
             "status": "success"
         }
     except Exception as e:

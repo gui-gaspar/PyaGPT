@@ -31,6 +31,16 @@ def fetch_server_url():
         st.error(f"An error occurred: {err}")
     return ""
 
+def fetch_server_url_generate():
+    try:
+        response = requests.get(f"{FASTAPI_URL}/server_url_generate")
+        response.raise_for_status()
+        data = response.json()
+        return data.get("server_url_generate")
+    except requests.exceptions.RequestException as err:
+        st.error(f"An error occurred: {err}")
+    return ""
+
 def get_openai_client(server_url):
     return OpenAI(
         base_url=server_url,

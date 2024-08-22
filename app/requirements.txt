@@ -9,3 +9,12 @@ extra_streamlit_components
 toml
 streamlit-authenticator
 
+pdf2image
+poppler-utils
+langchain
+langchain-core
+langchain-community
+langchain_text_splitters
+unstructured
+unstructured[all-docs]
+pdfminer.six
