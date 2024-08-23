@@ -1,0 +1,100 @@
+tipo,curso
+Licenciatura,Desporto
+Licenciatura,Educação Básica
+Licenciatura,Educação Física e Desporto
+Licenciatura,Educação Social
+Licenciatura,Enfermagem
+Licenciatura,Engenharia Informática
+Licenciatura,Fisioterapia
+Licenciatura,Gestão
+Licenciatura,Medicina Tradicional Chinesa
+Licenciatura,Osteopatia
+Licenciatura,Psychologia
+Licenciatura,Relações Internacionais
+Mestrado,Educação Pré-Escolar e Ensino do 1.º Ciclo do Ensino Básico
+Mestrado,Enfermagem de Saúde Mental e Psiquiátrica
+Mestrado,Enfermagem Médico-Cirúrgica na área de Enfermagem à Pessoa em Situação Crítica
+Mestrado,Ensino de Educação Física nos Ensinos Básico e Secundário
+Mestrado,Exercício e Saúde
+Mestrado,Psicologia da Educação e Aconselhamento
+Mestrado,Psicologia Social e das Organizações
+CTeSP,Análise de Dados em Gestão de Informação
+CTeSP,Animação, Modelação e Desenho Digital
+CTeSP,Assessoria e Gestão Administrativa
+CTeSP,Cibersegurança
+CTeSP,Desenvolvimento de Videojogos e Aplicações Multimédia
+CTeSP,Desporto, Lazer e Bem-Estar
+CTeSP,Desportos de Natureza e Animação Desportiva
+CTeSP,Eletrónica e Automação
+CTeSP,Exercício Físico e Saúde
+CTeSP,Gerontologia
+CTeSP,Gestão Clínica Administrativa
+CTeSP,Infraestruturas Cloud, Redes e Datacenter
+CTeSP,Intervenção Educativa em Creche
+CTeSP,Intervenção Socioeducativa e Desenvolvimento Comunitário
+CTeSP,Marketing e Vendas
+CTeSP,Programação em Web, Dispositivos e Aplicações Móveis
+CTeSP,Serviço Familiar e Comunitário
+CTeSP,Serviço Social e Desenvolvimento Comunitário
+CTeSP,Termalismo e Bem-Estar
+Pós-Graduação,Enfermagem de Bloco Operatório: Enfermagem de Anestesia
+Pós-Graduação,Enfermagem de Bloco Operatório: Instrumentação Cirúrgica
+Pós-Graduação,Enfermagem de Bloco Operatório: Instrumentação Cirúrgica e Enfermagem de Anestesia
+Pós-Graduação,Enfermagem do Trabalho
+Pós-Graduação,Enfermagem em Reprocessamento de Dispositivos
+Pós-Graduação,Enfermagem em Reprocessamento de Dispositivos e em Prevenção e Controlo de Infeção e Resistência aos Antimicrobianos
+Pós-Graduação,Fisioterapia no Desporto
+Pós-Graduação,Geronto-geriatria
+Pós-Graduação,Prevenção e Controlo de Infeção e Resistência aos Antimicrobianos
+Pós-Graduação,Psicologia da Saúde Ocupacional
+Pós-Graduação,Saúde Pública e Gestão da Qualidade Alimentar
+Pós-Graduação,Supervisão Clínica na Formação e Desenvolvimento Profissional de Enfermeiros
+Pós-Graduação,Supervisão Clínica para Enfermeiros
+Pós-Graduação,Supervisão Clínica para Profissionais de Saúde
+Pós-Graduação,Termalismo, Turismo e SPA
+Pós-Graduação,Administração e Gestão de Unidades de Saúde
+Pós-Graduação,Administração e Gestão de Unidades de Saúde e Gestão de Recursos Humanos
+Pós-Graduação,Administração Escolar
+Pós-Graduação,Bibliotecas Escolares — Gestão e Animação
+Pós-Graduação,Gestão de Recursos Humanos
+Pós-Graduação,Gestão de Serviços de Economia Social
+Pós-Graduação,Gestão e Administração Escolar
+Pós-Graduação,Gestão Estratégica de Recursos Humanos
+Pós-Graduação,Gestão Estratégica de Recursos Humanos e Gestão de Serviços de Economia Social
+Pós-Graduação,Inovação, Gestão da Qualidade e Auditoria em Saúde
+Pós-Graduação,Liderança e Negócios
+Pós-Graduação,Relações Internacionais — A Nova (des)Ordem Mundial: Abordagens Regionais para a Paz e os Conflitos
+Pós-Graduação,Saúde Pública e Gestão da Qualidade Alimentar
+Pós-Graduação,Bibliotecas Escolares — Gestão e Animação
+Pós-Graduação,Docência no Ensino Superior
+Pós-Graduação,Educação em Creche — Intervenção e Animação Educativa
+Pós-Graduação,Educação Especial: Domínio Cognitivo e Motor
+Pós-Graduação,Educação Especial: Domínio da Audição e Surdez
+Pós-Graduação,Educação Especial: Domínio da Baixa Visão e Cegueira
+Pós-Graduação,Educação Especial: Domínio da Intervenção Precoce na Infância
+Pós-Graduação,Intervenção Comunitária
+Pós-Graduação,Português Língua Não Materna
+Pós-Graduação,Supervisão Pedagógica e Avaliação em Educação
+Pós-Graduação,Cibersegurança e Proteção de Dados na Administração Pública
+Pós-Graduação,Tecnologias de Informação e Comunicação: Ecossistemas Híbridos de Aprendizagem
+Pós-Graduação,Transformação Digital
+Pós-Graduação,Fisioterapia no Desporto
+Pós-Graduação,Treino de Alto Rendimento Desportivo
+Pós-Graduação,Treino Personalizado e Exercício Clínico
+Formação Avançada,Ambientes Híbridos com Recurso a Metodologias Ativas: Aprendizagem Invertida e Gamificação
+Formação Avançada,Atividades Físicas de Exploração da Natureza — Uma Perspetiva Formativa Ecológica
+Formação Avançada,Curso de Formação de Formadores em Ambientes Virtuais de Aprendizagem em Contexto Prisional
+Formação Avançada,Curso de Profissionalização em Serviço
+Formação Avançada,Curso para Acupunctores com Cédula Provisória
+Formação Avançada,Ensino de Inglês no 1.º Ciclo do Ensino Básico - CFS 110
+Formação Avançada,Ensino de Inglês no 1.º Ciclo do Ensino Básico - CFS 220
+Formação Avançada,Ensino de Inglês no 1.º Ciclo do Ensino Básico - CFS 330
+Formação Avançada,Gestão de Projetos Culturais
+Formação Avançada,Imagiologia aplicada à fisioterapia
+Formação Avançada,Matemática Recreativa: Jogos, Magia e Outras Atividades “Fora Da Caixa”
+Formação Avançada,Metodologia Criativa na Abordagem da Ginástica em Educação Pré-Escolar e no 1.º Ciclo do Ensino Básico
+Formação Avançada,Metodologias Ativas — Aprendizagem Mediada por Tecnologias
+Formação Avançada,Música na Escola. A Abrir
+Formação Avançada,Música Significativa
+Formação Avançada,Perturbação do Desenvolvimento da Coordenação em Contexto Escolar: Da Identificação à Intervenção
+Formação Avançada,Plataformas Digitais de Edição de Partituras

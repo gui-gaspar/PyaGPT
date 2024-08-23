@@ -1,0 +1,34 @@
+tipo,curso,Ano,Semestre,Unidade Curricular,CH,ECTS
+Licenciatura,Engenharia Informática,1º Ano,1º Semestre,Matemática I,"36 T | 36 TP",6
+Licenciatura,Engenharia Informática,1º Ano,1º Semestre,Álgebra Linear e Geometria Analítica,"36 T | 36 TP",5
+Licenciatura,Engenharia Informática,1º Ano,1º Semestre,Introdução à Programação,"30 T | 30 TP | 10 OT",5
+Licenciatura,Engenharia Informática,1º Ano,1º Semestre,Sistemas Digitais,"30 T | 30 PL | 10 OT",5
+Licenciatura,Engenharia Informática,1º Ano,1º Semestre,Introdução à Arquitetura de Computadores,"30 T | 30 TP | 10 OT",5
+Licenciatura,Engenharia Informática,1º Ano,1º Semestre,Física,"30 T | 30 PL",4
+Licenciatura,Engenharia Informática,1º Ano,2º Semestre,Microprocessadores e Computadores Pessoais,"30 T | 36 TP",7
+Licenciatura,Engenharia Informática,1º Ano,2º Semestre,Paradigmas de Linguagens de Programação,"36 T | 36 PL",7
+Licenciatura,Engenharia Informática,1º Ano,2º Semestre,Matemática II,"36 T | 36 TP",6
+Licenciatura,Engenharia Informática,1º Ano,2º Semestre,Algoritmos e Estruturas de Dados,"30 T | 20 PL",5
+Licenciatura,Engenharia Informática,1º Ano,2º Semestre,Computação Humano-Máquina,"30 T | 30 PL | 10 OT",5
+Licenciatura,Engenharia Informática,2º Ano,1º Semestre,Programação com Objetos,"30 T | 20 PL",6
+Licenciatura,Engenharia Informática,2º Ano,1º Semestre,Sistemas Operativos,"30 T | 20 PL | 20 OT",6
+Licenciatura,Engenharia Informática,2º Ano,1º Semestre,Introdução à Multimédia e Aplicações,"30 T | 36 TP",6
+Licenciatura,Engenharia Informática,2º Ano,1º Semestre,Matemática Discreta,"30 T | 36 TP",4
+Licenciatura,Engenharia Informática,2º Ano,1º Semestre,Análise Estatística,"20 T | 30 PL",4
+Licenciatura,Engenharia Informática,2º Ano,1º Semestre,Gestão,"30 T | 36 TP",4
+Licenciatura,Engenharia Informática,2º Ano,2º Semestre,Linguagens Avançadas de Programação,"30 T | 20 PL | 20 OT",6
+Licenciatura,Engenharia Informática,2º Ano,2º Semestre,Engenharia de Software I,"30 T | 40 PL | 10 OT",6
+Licenciatura,Engenharia Informática,2º Ano,2º Semestre,Teoria de Autómatos e Compiladores,"30 T | 30 TP | 10 OT",5
+Licenciatura,Engenharia Informática,2º Ano,2º Semestre,Bases de Dados,"30 T | 30 PL",5
+Licenciatura,Engenharia Informática,2º Ano,2º Semestre,Redes de Computadores I,"30 T | 30 PL",5
+Licenciatura,Engenharia Informática,2º Ano,2º Semestre,Marketing Digital,"30 T",3
+Licenciatura,Engenharia Informática,3º Ano,1º Semestre,Engenharia de Software II,"30 T | 30 PL | 10 OT",6
+Licenciatura,Engenharia Informática,3º Ano,1º Semestre,Sistemas Embebidos,"30 T | 30 PL | 10 OT",6
+Licenciatura,Engenharia Informática,3º Ano,1º Semestre,Sistemas de Informação,"30 T | 20 PL | 20 OT",5
+Licenciatura,Engenharia Informática,3º Ano,1º Semestre,Segurança e Direito da Informática,"20 T | 30 PL",5
+Licenciatura,Engenharia Informática,3º Ano,1º Semestre,Redes de Computadores II,"30 T | 30 PL | 10 OT",5
+Licenciatura,Engenharia Informática,3º Ano,1º Semestre,Empreendedorismo,"30 T | 36 TP",3
+Licenciatura,Engenharia Informática,3º Ano,2º Semestre,Projeto Integrador,"10 TP | 20 OT",15
+Licenciatura,Engenharia Informática,3º Ano,2º Semestre,Inteligência Artificial,"30 TP | 20 PL | 10 OT",5
+Licenciatura,Engenharia Informática,3º Ano,2º Semestre,Gestão de Sistemas de Informação,"30 T | 20 PL",5
+Licenciatura,Engenharia Informática,3º Ano,2º Semestre,Sistemas Distribuídos,"30 T | 30 TP | 10 OT",5
