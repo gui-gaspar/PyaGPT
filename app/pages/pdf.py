@@ -5,7 +5,7 @@ from PIL import Image
 from io import BytesIO
 import json
 from pdfminer.high_level import extract_text
-from utils import fetch_server_url, fetch_server_url_generate, get_models_info, extract_model_names
+from utils import fetch_server_url, fetch_server_url_generate, get_modelos_info, extract_model_names
 
 def img_to_base64(image: Image.Image) -> str:
     """
@@ -48,21 +48,21 @@ def main():
         st.error("Failed to fetch the server URL for generation.")
         return
 
-    models_info = get_models_info(server_url)
-    if not models_info:
+    modelos_info = get_modelos_info(server_url)
+    if not modelos_info:
         st.error("Failed to fetch model list.")
         return
 
     # Extract model names from the fetched model information
-    if not isinstance(models_info, dict) or "data" not in models_info:
+    if not isinstance(modelos_info, dict) or "data" not in modelos_info:
         st.warning("Invalid model information format.")
         return
 
-    if not isinstance(models_info["data"], list):
+    if not isinstance(modelos_info["data"], list):
         st.warning("The 'data' field in model information is not a list.")
         return
 
-    available_models = [model.get("id") for model in models_info["data"] if isinstance(model, dict)]
+    available_models = [model.get("id") for model in modelos_info["data"] if isinstance(model, dict)]
     if not available_models:
         st.warning("No available models found.")
         return

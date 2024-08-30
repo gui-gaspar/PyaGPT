@@ -4,7 +4,7 @@ import base64
 from PIL import Image
 from io import BytesIO
 import json
-from utils import fetch_server_url, fetch_server_url_generate, get_models_info, extract_model_names
+from utils import fetch_server_url, fetch_server_url_generate, get_modelos_info, extract_model_names
 
 def img_to_base64(image):
     """
@@ -19,28 +19,28 @@ def img_to_base64(image):
     image.save(buffered, format="PNG")
     return base64.b64encode(buffered.getvalue()).decode()
 
-def get_allowed_model_names(models_info):
+def get_allowed_model_names(modelos_info):
     """
     Extract allowed model names from the fetched model information.
 
     Args:
-        models_info: dict - Dictionary containing model information.
+        modelos_info: dict - Dictionary containing model information.
     Returns:
         tuple: A tuple of allowed model names.
     """
     allowed_models = ["bakllava:latest", "llava:latest"]
     
-    # Check if the models_info dictionary has a "data" key and that it's a list
-    if not isinstance(models_info, dict) or "data" not in models_info:
+    # Check if the modelos_info dictionary has a "data" key and that it's a list
+    if not isinstance(modelos_info, dict) or "data" not in modelos_info:
         st.warning("Invalid model information format.")
         return tuple()  # Return an empty tuple if the format is incorrect
 
     # Ensure 'data' key is a list
-    if not isinstance(models_info["data"], list):
+    if not isinstance(modelos_info["data"], list):
         st.warning("The 'data' field in model information is not a list.")
         return tuple()
 
-    model_names = [model.get("id") for model in models_info["data"] if isinstance(model, dict)]
+    model_names = [model.get("id") for model in modelos_info["data"] if isinstance(model, dict)]
     return tuple(
         model
         for model in allowed_models
@@ -61,12 +61,12 @@ def main():
         st.error("Failed to fetch the server URL for generation.")
         return
 
-    models_info = get_models_info(server_url)
-    if not models_info:
+    modelos_info = get_modelos_info(server_url)
+    if not modelos_info:
         st.error("Failed to fetch model list.")
         return
 
-    available_models = get_allowed_model_names(models_info)
+    available_models = get_allowed_model_names(modelos_info)
     if not available_models:
         st.warning("No available models found.")
         return

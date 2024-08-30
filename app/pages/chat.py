@@ -1,8 +1,6 @@
 import streamlit as st
 from utils import (
-    get_models_info, extract_model_names, fetch_escola_info,
-    fetch_personal_info, fetch_server_url, format_personal_info,
-    format_escola_info, get_openai_client
+    fetch_contatos, fetch_server_url, format_contatos, get_modelos_info, extract_model_names, get_openai_client
 )
 
 def chat_page():
@@ -15,8 +13,8 @@ def chat_page():
         return
 
     try:
-        models_info = get_models_info(server_url)
-        available_models = extract_model_names(models_info)
+        modelos_info = get_modelos_info(server_url)
+        available_models = extract_model_names(modelos_info)
     except Exception as e:
         st.error(f"Falha ao recuperar modelos: {e}")
         return
@@ -38,16 +36,17 @@ def chat_page():
         st.session_state.system_message = {
             "role": "system",
             "content": (
-                "Você é o assistente virtual PyaGPT da Escola Superior de Tecnologia e Gestão Jean Piaget. "
-                "Utilize as informações detalhadas sobre a Escola e informações pessoais do utilizador, se disponíveis. "
-                "Responda apenas a perguntas sobre a Escola Superior de Tecnologia e Gestão Jean Piaget em Almada e forneça informações "
-                "precisas e detalhadas com base nas informações fornecidas. Responda em Português de Portugal. "
-                "Apenas responde ao que for perguntado e não divulgue informação se essa não for pedida."
+                "Você é o assistente virtual PyaGPT do Instituto Piaget "
+                "Responda em Português de Portugal"
+                "Utilize as informações detalhadas sobre a Escola e informações pessoais do utilizador, se disponíveis"
+                "Responda apenas a perguntas sobre a Escola Superior de Tecnologia e Gestão Jean Piaget em Almada e forneça informações precisas e detalhadas com base nas informações fornecidas"
+                "Apenas responde ao que for perguntado e não divulgue informação se essa não for pedida"
             )
         }
         st.session_state.welcome_message_added = False
 
-    st.session_state.escola_info = fetch_escola_info()
+    if "contatos_info" not in st.session_state:
+        st.session_state.contatos_info = fetch_contatos()
 
     if st.session_state.get('logged_in') and st.session_state.get('username'):
         user_label = f"**{st.session_state.username.capitalize()}**"
@@ -106,18 +105,12 @@ def chat_page():
 
             context = ""
 
-            if st.session_state.get('logged_in'):
-                personal_info = fetch_personal_info(st.session_state.username)
-                if personal_info:
-                    context += format_personal_info(personal_info) + "\n"
-                else:
-                    st.warning("Informações pessoais não carregadas.", icon="⚠️")
+            # Fetch and format contacts information
+            if "contatos_info" in st.session_state:
+                contatos_info = st.session_state.contatos_info
+                context += format_contatos(contatos_info) + "\n"
 
-            escola_info = st.session_state.escola_info
-            if escola_info:
-                context += format_escola_info(escola_info)
-            else:
-                st.warning("Informações da escola não carregadas.", icon="⚠️")
+            # Other context fetching can be placed here...
 
             st.session_state.system_message["content"] = context
 

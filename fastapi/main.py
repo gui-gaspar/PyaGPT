@@ -41,6 +41,24 @@ class LoginRequest(BaseModel):
     username: str
     password: str
 
+@app.get("/")
+async def root():
+    return {
+        "message": "Bem-vindo ao backend FastAPI do PyaGPT!",
+        "description": "Este backend fornece APIs para interagir com uma base de dados Neo4j, autenticação de utilizadores, e integração com modelos da OpenAI. "
+                       "Utilize as várias rotas disponíveis para obter informações sobre a escola, dados pessoais, e muito mais.",
+        "endpoints": {
+            "/server_url": "Obtém o URL do servidor usado para inicializar o cliente OpenAI.",
+            "/server_url_generate": "Obtém o URL usado para requisições de geração de texto via API.",
+            "/modelos": "Lista os modelos disponíveis no servidor OpenAI configurado.",
+            "/login": "Autentica um utilizador com nome de utilizador e senha.",
+            "/escola_info": "Obtém informações detalhadas sobre a escola específica.",
+            "/personal_info/{username}": "Obtém informações pessoais detalhadas para um utilizador específico."
+        }
+
+    }
+
+
 @app.get("/server_url")
 async def get_server_url():
     try:
@@ -67,8 +85,8 @@ async def get_server_url():
         # Handle unexpected errors
         raise HTTPException(status_code=500, detail=f"An unexpected error occurred: {str(e)}")
     
-@app.get("/models")
-async def get_models():
+@app.get("/modelos")
+async def get_modelos():
     try:
         # Fetch models from the OpenAI endpoint
         openai_url = f"{server_url}/models"
@@ -78,8 +96,8 @@ async def get_models():
         async with httpx.AsyncClient() as client:
             response = await client.get(openai_url, headers=headers)
             response.raise_for_status()
-            models_info = response.json()
-            return models_info
+            modelos_info = response.json()
+            return modelos_info
     except httpx.HTTPStatusError as http_err:
         raise HTTPException(status_code=response.status_code, detail=str(http_err))
     except httpx.RequestError as req_err:
@@ -88,7 +106,7 @@ async def get_models():
 @app.post("/login")
 async def login(request: LoginRequest):
     query = """
-    MATCH (u:User {username: $username, password: $password})
+    MATCH (u:Utilizadores {username: $username, password: $password})
     RETURN u
     """
     with driver.session() as session:
@@ -98,53 +116,249 @@ async def login(request: LoginRequest):
             return {"valid": True}
         return {"valid": False}
 
-@app.get("/escola_info")
-async def get_escola_info():
+# Endpoints para Nodes
+
+@app.get("/contatos")
+async def get_contatos():
     query = """
-    MATCH (e:Escola {nome: 'Escola Superior de Tecnologia e Gestão Jean Piaget'})
-    RETURN e.nome AS nome, e.historia AS historia, e.telefone AS telefone, e.email AS email, e.endereco AS endereco, e.cursos AS cursos
+    MATCH (c:Contato)
+    RETURN c.instituto AS instituto, c.tipo AS tipo, c.morada AS morada, 
+           c.codigo_postal AS codigo_postal, c.telefone AS telefone, c.fax AS fax, 
+           c.email AS email, c.gps AS gps, c.nome AS nome, c.skype AS skype, 
+           c.horario AS horario
     """
     with driver.session() as session:
         result = session.run(query)
-        record = result.single()
-        if record:
-            return {
-                "nome": record["nome"],
-                "historia": record["historia"],
-                "telefone": record["telefone"],
-                "email": record["email"],
-                "endereco": record["endereco"],
-                "cursos": record["cursos"]
-            }
-        raise HTTPException(status_code=404, detail="Escola info not found")
+        records = [record.data() for record in result]
+        if records:
+            return records
+        raise HTTPException(status_code=404, detail="Contatos not found")
 
-@app.get("/personal_info/{username}")
-async def get_personal_info(username: str):
+@app.get("/cursos")
+async def get_cursos():
     query = """
-    MATCH (u:User {username: $username})
-    RETURN u.username AS username, u.full_name AS full_name, u.email AS email,
-           u.phone AS phone, u.address AS address, u.courses_enrolled AS courses_enrolled,
-           u.grades AS grades, u.additional_info AS additional_info
+    MATCH (c:Curso)
+    RETURN c.tipo AS tipo, c.curso AS curso, c.escola AS escola
+    """
+    with driver.session() as session:
+        result = session.run(query)
+        records = [record.data() for record in result]
+        if records:
+            return records
+        raise HTTPException(status_code=404, detail="Cursos not found")
+
+
+@app.get("/curso_info")
+async def get_curso_info():
+    query = """
+    MATCH (c:CursoInfo)
+    RETURN c.curso AS curso, c.saídas_profissionais AS saídas_profissionais, 
+           c.estatuto_profissional AS estatuto_profissional, c.apresentação AS apresentação,
+           c.acesso_a_outros_ciclos AS acesso_a_outros_ciclos, c.área_de_estudo AS área_de_estudo,
+           c.regras_de_avaliação AS regras_de_avaliação, c.acesso AS acesso, c.diploma AS diploma
+    """
+    with driver.session() as session:
+        result = session.run(query)
+        records = [record.data() for record in result]
+        if records:
+            return records
+        raise HTTPException(status_code=404, detail="No curso info found")
+
+@app.get("/plano_estudos")
+async def get_plano_estudos():
+    query = """
+    MATCH (p:PlanoEstudos)
+    RETURN p.tipo AS tipo, p.curso AS curso, p.ano AS ano, p.semestre AS semestre,
+           p.unidade_curricular AS unidade_curricular, p.ch AS ch, p.ects AS ects
+    ORDER BY p.curso, p.ano, p.semestre
+    """
+    with driver.session() as session:
+        result = session.run(query)
+        records = [record.data() for record in result]
+        if records:
+            return records
+        raise HTTPException(status_code=404, detail="No plano de estudos found")
+
+
+@app.get("/escolas")
+async def get_escolas():
+    query = """
+    MATCH (e:Escola)
+    RETURN e.nome AS escola, e.descricao AS descricao
+    """
+    with driver.session() as session:
+        result = session.run(query)
+        records = [record.data() for record in result]
+        if records:
+            return records
+        raise HTTPException(status_code=404, detail="Escolas not found")
+
+@app.get("/institutos")
+async def get_institutos():
+    query = """
+    MATCH (i:Instituto)
+    RETURN i.nome AS instituto
+    """
+    with driver.session() as session:
+        result = session.run(query)
+        records = [record.data() for record in result]
+        if records:
+            return records
+        raise HTTPException(status_code=404, detail="Institutos not found")
+
+
+@app.get("/orgaos_de_gestao")
+async def get_orgaos_gestao():
+    query = """
+    MATCH (o:OrgaosGestao)
+    RETURN o.escola AS escola, o.função AS função, o.nome AS nome
+    """
+    with driver.session() as session:
+        result = session.run(query)
+        records = [record.data() for record in result]
+        if records:
+            return records
+        raise HTTPException(status_code=404, detail="Órgãos de gestão not found")
+
+@app.get("/utilizadores")
+async def get_utilizadores():
+    query = "MATCH (u:Utilizadores) RETURN u"
+    with driver.session() as session:
+        result = session.run(query)
+        records = [dict(record["u"]) for record in result]
+        return {"utilizadores": records}
+
+@app.get("/utilizadores/{username}")
+async def get_utilizador(username: str):
+    query = "MATCH (u:Utilizadores {username: $username}) RETURN u"
+    with driver.session() as session:
+        result = session.run(query, username=username)
+        user = result.single()
+        if user:
+            return {"utilizador": dict(user["u"])}
+        raise HTTPException(status_code=404, detail=f"Utilizador com username '{username}' não encontrado.")
+
+# Endpoints para Relações
+
+@app.get("/relacoes/oferece_curso")
+async def relacao_oferece_curso():
+    query = """
+    MATCH (e:Escola)-[:OFERECE]->(c:Curso)
+    RETURN e.nome AS Escola, c.curso AS Curso
+    """
+    with driver.session() as session:
+        result = session.run(query)
+        records = [record.data() for record in result]
+        return {"relacoes": records}
+
+@app.get("/relacoes/tem_info")
+async def relacao_tem_info():
+    query = """
+    MATCH (c:Curso)-[:TEM_INFO]->(ci:CursoInfo)
+    RETURN c.curso AS Curso, ci.curso AS CursoInfo
+    """
+    with driver.session() as session:
+        result = session.run(query)
+        records = [record.data() for record in result]
+        return {"relacoes": records}
+
+@app.get("/relacoes/tem_horario")
+async def relacao_tem_horario():
+    query = """
+    MATCH (c:Curso)-[:TEM_HORARIO]->(h:Horarios)
+    RETURN c.curso AS Curso, h.cadeira AS Cadeira, h.hora_inicio AS HoraInicio, h.hora_fim AS HoraFim
+    """
+    with driver.session() as session:
+        result = session.run(query)
+        records = [record.data() for record in result]
+        return {"relacoes": records}
+
+@app.get("/relacoes/gerido_por")
+async def relacao_gerido_por():
+    query = """
+    MATCH (e:Escola)-[:GERIDO_POR]->(o:OrgaosGestao)
+    RETURN e.nome AS Escola, o.nome AS OrgãoGestão
+    """
+    with driver.session() as session:
+        result = session.run(query)
+        records = [record.data() for record in result]
+        return {"relacoes": records}
+
+@app.get("/relacoes/tem_plano_de_estudos")
+async def relacao_tem_plano_de_estudos():
+    query = """
+    MATCH (c:Curso)-[:TEM_PLANO_DE_ESTUDOS]->(p:PlanoEstudos)
+    RETURN c.curso AS Curso, p.unidade_curricular AS UnidadeCurricular, p.ch AS CH
+    """
+    with driver.session() as session:
+        result = session.run(query)
+        records = [record.data() for record in result]
+        return {"relacoes": records}
+
+@app.get("/relacoes/oferece")
+async def relacao_oferece():
+    query = """
+    MATCH (i:Instituto)-[:OFERECE]->(e:Escola)
+    RETURN i.nome AS Instituto, e.nome AS Escola
+    """
+    with driver.session() as session:
+        result = session.run(query)
+        records = [record.data() for record in result]
+        return {"relacoes": records}
+
+@app.get("/relacoes/tem_contato_instituto")
+async def relacao_tem_contato_instituto():
+    query = """
+    MATCH (i:Instituto)-[:TEM_CONTATO]->(c:Contato)
+    RETURN i.nome AS Instituto, c.nome AS ContatoNome
+    """
+    with driver.session() as session:
+        result = session.run(query)
+        records = [record.data() for record in result]
+        return {"relacoes": records}
+
+@app.get("/relacoes/tem_contato_escola")
+async def relacao_tem_contato_escola():
+    query = """
+    MATCH (e:Escola)-[:TEM_CONTATO]->(c:Contato)
+    RETURN e.nome AS Escola, c.nome AS ContatoNome
+    """
+    with driver.session() as session:
+        result = session.run(query)
+        records = [record.data() for record in result]
+        return {"relacoes": records}
+    
+@app.get("/relacoes/inscrito_em/{username}")
+async def relacao_inscrito_em(username: str):
+    query = """
+    MATCH (u:Utilizadores {username: $username})-[:INSCRITO_EM]->(c:Curso)
+    RETURN u.username AS Utilizador, c.curso AS Curso
     """
     with driver.session() as session:
         result = session.run(query, username=username)
-        record = result.single()
-        if record:
-            grades_str = record.get("grades", "{}")
-            try:
-                grades = json.loads(grades_str) if grades_str else {}  # Ensure it's a dictionary
-            except json.JSONDecodeError:
-                grades = {}  # Default to an empty dictionary if parsing fails
-            return {
-                "username": record["username"],
-                "full_name": record["full_name"],
-                "email": record["email"],
-                "phone": record["phone"],
-                "address": record["address"],
-                "courses_enrolled": record["courses_enrolled"],
-                "grades": grades,  # Ensure it's a dictionary
-                "additional_info": record["additional_info"]
-            }
-        raise HTTPException(status_code=404, detail="Personal info not found")
+        records = [record.data() for record in result]
+        return {"relacoes": records}
+
+@app.get("/relacoes/pertence_a/{username}")
+async def relacao_pertence_a(username: str):
+    query = """
+    MATCH (u:Utilizadores {username: $username})-[:PERTENCE_A]->(e:Escola)
+    RETURN u.username AS Utilizador, e.nome AS Escola
+    """
+    with driver.session() as session:
+        result = session.run(query, username=username)
+        records = [record.data() for record in result]
+        return {"relacoes": records}
+
+@app.get("/relacoes/pertence_a_instituto/{username}")
+async def relacao_pertence_a_instituto(username: str):
+    query = """
+    MATCH (u:Utilizadores {username: $username})-[:PERTENCE_A_INSTITUTO]->(i:Instituto)
+    RETURN u.username AS Utilizador, i.nome AS Instituto
+    """
+    with driver.session() as session:
+        result = session.run(query, username=username)
+        records = [record.data() for record in result]
+        return {"relacoes": records}
 
 

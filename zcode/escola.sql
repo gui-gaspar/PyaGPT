@@ -22,14 +22,18 @@ CREATE (ess_viseu:Escola {nome: 'Escola Superior de Saúde Jean Piaget Viseu'}),
 CREATE (ip_norte:Instituto {nome: 'Instituto Politécnico Jean Piaget do Norte'}),
        (ip_sul:Instituto {nome: 'Instituto Politécnico Jean Piaget do Sul'});
 
-// Associar as escolas ao Instituto Politécnico Jean Piaget do Norte
-CREATE (esde_gaia:Escola {nome: 'Escola Superior de Desporto e Educação Jean Piaget Vila Nova de Gaia'}),
-       (ess_gaia:Escola {nome: 'Escola Superior de Saúde Jean Piaget Vila Nova de Gaia'});
-
-// Associar as escolas ao Instituto Politécnico Jean Piaget do Sul
-CREATE (ese_almada:Escola {nome: 'Escola Superior de Educação Jean Piaget Almada'}),
-       (ess_almada:Escola {nome: 'Escola Superior de Saúde Jean Piaget Almada'}),
-       (ess_algarve:Escola {nome: 'Escola Superior de Saúde Jean Piaget Algarve'}),
-       (estg_almada:Escola {nome: 'Escola Superior de Tecnologias e Gestão Almada'});
-
-
+// Relacionar as escolas com os Institutos Politécnicos
+MATCH (ip_norte:Instituto {nome: 'Instituto Politécnico Jean Piaget do Norte'}),
+      (ip_sul:Instituto {nome: 'Instituto Politécnico Jean Piaget do Sul'}),
+      (esde_gaia:Escola {nome: 'Escola Superior de Desporto e Educação Jean Piaget Vila Nova de Gaia'}),
+      (ess_gaia:Escola {nome: 'Escola Superior de Saúde Jean Piaget Vila Nova de Gaia'}),
+      (ese_almada:Escola {nome: 'Escola Superior de Educação Jean Piaget Almada'}),
+      (ess_almada:Escola {nome: 'Escola Superior de Saúde Jean Piaget Almada'}),
+      (ess_algarve:Escola {nome: 'Escola Superior de Saúde Jean Piaget Algarve'}),
+      (estg_almada:Escola {nome: 'Escola Superior de Tecnologia e Gestão Jean Piaget Almada'})
+MERGE (ip_norte)-[:CONTEM]->(esde_gaia)
+MERGE (ip_norte)-[:CONTEM]->(ess_gaia)
+MERGE (ip_sul)-[:CONTEM]->(ese_almada)
+MERGE (ip_sul)-[:CONTEM]->(ess_almada)
+MERGE (ip_sul)-[:CONTEM]->(ess_algarve)
+MERGE (ip_sul)-[:CONTEM]->(estg_almada);
