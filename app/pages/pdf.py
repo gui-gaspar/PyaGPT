@@ -35,7 +35,7 @@ def extract_text_from_pdf(file_upload) -> str:
     return text
 
 def main():
-    st.title("LLaVA Playground")
+    st.title("PyaGPT - PDF's")
     st.subheader("Interact with LLaVA models", divider="red", anchor=False)
 
     server_url = fetch_server_url()
@@ -67,7 +67,7 @@ def main():
         st.warning("No available models found.")
         return
 
-    selected_model = st.selectbox("Pick a model available locally on your system ↓", available_models, key=1)
+    selected_model = st.selectbox("Escolha um modelo disponível localmente no seu sistema ↓", available_models, key=1)
 
     if "chats" not in st.session_state:
         st.session_state.chats = []
@@ -75,7 +75,7 @@ def main():
     if "uploaded_file_state" not in st.session_state:
         st.session_state.uploaded_file_state = None
 
-    uploaded_file = st.file_uploader("Upload a PDF file for analysis", type=["pdf"])
+    uploaded_file = st.file_uploader("Faça upload de um PDF para análise:", type=["pdf"])
 
     col1, col2 = st.columns(2)
 
@@ -83,18 +83,18 @@ def main():
         if uploaded_file is not None:
             st.session_state.uploaded_file_state = uploaded_file.getvalue()
             pdf_text = extract_text_from_pdf(uploaded_file)
-            st.text_area("Extracted Text", pdf_text, height=300)
+            st.text_area("Texto Extraido", pdf_text, height=300)
 
     with col1:
         if uploaded_file is not None:
             for message in st.session_state.chats:
-                avatar = "🌋" if message["role"] == "assistant" else "🫠"
+                avatar = "🤖" if message["role"] == "assistant" else "😎"
                 with st.chat_message(message["role"], avatar=avatar):
                     st.markdown(message["content"])
 
-            if user_input := st.chat_input("Question about the document...", key="chat_input"):
+            if user_input := st.chat_input("Escreva uma pergunta sobre o documento PDF...", key="chat_input"):
                 st.session_state.chats.append({"role": "user", "content": user_input})
-                with st.chat_message("user", avatar="🫠"):
+                with st.chat_message("user", avatar="😎"):
                     st.markdown(user_input)
 
                 API_URL = api_url_generate
@@ -111,8 +111,8 @@ def main():
 
                 llava_response = ""
 
-                with st.chat_message("assistant", avatar="🌋"):
-                    with st.spinner(":blue[processing...]"):
+                with st.chat_message("assistant", avatar="🤖"):
+                    with st.spinner(":blue[Aguarde enquanto o PyaGPT genera uma resposta...]"):
                         try:
                             response = requests.post(API_URL, json=data, headers=headers)
                             response.raise_for_status()

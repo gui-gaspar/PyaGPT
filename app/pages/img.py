@@ -48,7 +48,7 @@ def get_allowed_model_names(modelos_info):
     )
 
 def main():
-    st.title("LLaVA Playground")
+    st.title("PyaGPT - Imagens")
     st.subheader("Interact with LLaVA models", divider="red", anchor=False)
 
     server_url = fetch_server_url()
@@ -71,7 +71,7 @@ def main():
         st.warning("No available models found.")
         return
 
-    selected_model = st.selectbox("Pick a model available locally on your system ↓", available_models, key=1)
+    selected_model = st.selectbox("Escolha um modelo disponível localmente no seu sistema ↓", available_models, key=1)
 
     if "chats" not in st.session_state:
         st.session_state.chats = []
@@ -79,7 +79,7 @@ def main():
     if "uploaded_file_state" not in st.session_state:
         st.session_state.uploaded_file_state = None
 
-    uploaded_file = st.file_uploader("Upload an image for analysis", type=["png", "jpg", "jpeg"])
+    uploaded_file = st.file_uploader("Faça upload de uma imagem para análise:", type=["png", "jpg", "jpeg"])
 
     col1, col2 = st.columns(2)
 
@@ -87,18 +87,18 @@ def main():
         if uploaded_file is not None:
             st.session_state.uploaded_file_state = uploaded_file.getvalue()
             image = Image.open(BytesIO(st.session_state.uploaded_file_state))
-            st.image(image, caption="Uploaded image")
+            st.image(image, caption="Imagem Carregada")
 
     with col1:
         if uploaded_file is not None:
             for message in st.session_state.chats:
-                avatar = "🌋" if message["role"] == "assistant" else "🫠"
+                avatar = "🤖" if message["role"] == "assistant" else "😎"
                 with st.chat_message(message["role"], avatar=avatar):
                     st.markdown(message["content"])
 
-            if user_input := st.chat_input("Question about the image...", key="chat_input"):
+            if user_input := st.chat_input("Escreva uma pergunta sobre a imagem...", key="chat_input"):
                 st.session_state.chats.append({"role": "user", "content": user_input})
-                with st.chat_message("user", avatar="🫠"):
+                with st.chat_message("user", avatar="😎"):
                     st.markdown(user_input)
 
                 image_base64 = img_to_base64(image)
@@ -115,8 +115,8 @@ def main():
 
                 llava_response = ""  # Initialize llava_response to an empty string
 
-                with st.chat_message("assistant", avatar="🌋"):
-                    with st.spinner(":blue[processing...]"):
+                with st.chat_message("assistant", avatar="🤖"):
+                    with st.spinner(":blue[Aguarde enquanto o PyaGPT genera uma resposta...]"):
                         try:
                             response = requests.post(API_URL, json=data, headers=headers)
                             response.raise_for_status()

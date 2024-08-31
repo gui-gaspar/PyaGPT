@@ -1,9 +1,9 @@
 import streamlit as st
 from pages.chat import chat_page
-from pages.login import logout, main as login_main
-from pages.multimodal import main as multimodal_main
+from pages.login import logout, main as login_page
+from pages.img import main as img_page
 from pages.settings import main as settings_main
-from pages.pdf import main as pdf_rag_main  # Import the new PDF RAG page
+from pages.pdf import main as pdf_page 
 
 # Set page configuration
 st.set_page_config(
@@ -22,14 +22,14 @@ def main():
     pages = {
         "Chat": chat_page,
         "Teste menu 2": settings_main,
-        "Login": login_main
+        "Login": login_page
     }
 
     # Add conditional pages based on login status
     if st.session_state.get('logged_in'):
         pages.update({
-            "Teste menu": multimodal_main,
-            "Teste menu 3": pdf_rag_main
+            "Imagem": img_page,
+            "PDF": pdf_page
         })
 
     # Sidebar navigation buttons
