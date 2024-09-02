@@ -1,13 +1,14 @@
 import os
 import streamlit as st
 from datetime import datetime
+import pytz
 from utils import (
     fetch_contatos, fetch_server_url, get_modelos_info, extract_model_names, get_openai_client
 )
 
 def chat_page():
     st.title("PyaGPT - Assistente Virtual do Instituto Piaget")
-    st.subheader("Bem-vindo ao PyaGPT!")
+    st.subheader("Bem-vindo ao PyaGPT!", divider="red", anchor=False)
 
     server_url = fetch_server_url()  # Fetch server URL dynamically
     if not server_url:
@@ -51,22 +52,22 @@ def chat_page():
         st.session_state.contatos_info = fetch_contatos()
 
     if st.session_state.get('logged_in') and st.session_state.get('username'):
-        user_label = f"{st.session_state.username.capitalize()}"
+        user_label = f"**{st.session_state.username.capitalize()}**"
     else:
-        user_label = "Convidado"
+        user_label = "**Convidado**"
 
     if not st.session_state.welcome_message_added:
         if st.session_state.get('logged_in'):
             welcome_message = (
-                f"Olá <strong>{user_label}</strong>! Eu sou o PyaGPT, o assistente virtual da Escola Superior de Tecnologia e Gestão Jean Piaget. "
+                f"Olá {user_label}! Eu sou o PyaGPT, o assistente virtual da Escola Superior de Tecnologia e Gestão Jean Piaget. "
                 "Como posso ajudá-lo hoje?"
             )
         else:
             welcome_message = (
-                "Olá <strong>Convidado</strong>! Eu sou o PyaGPT, o assistente virtual da Escola Superior de Tecnologia e Gestão Jean Piaget. "
+                "Olá **Convidado**! Eu sou o PyaGPT, o assistente virtual da Escola Superior de Tecnologia e Gestão Jean Piaget. "
                 "Como posso ajudá-lo hoje?"
             )
-        st.session_state.messages.insert(0, {
+        st.session_state.messages.insert(0, {  # Insert at the beginning
             "role": "assistant",
             "content": welcome_message
         })
@@ -74,10 +75,10 @@ def chat_page():
     else:
         if st.session_state.messages and st.session_state.messages[0]["role"] == "assistant":
             first_message = st.session_state.messages[0]
-            if "Olá <strong>Convidado</strong>" in first_message["content"] and st.session_state.get('logged_in'):
+            if "Olá **Convidado**" in first_message["content"] and st.session_state.get('logged_in'):
                 st.session_state.messages.pop(0)
                 updated_welcome_message = (
-                    f"Olá <strong>{user_label}</strong>! Eu sou o PyaGPT, o assistente virtual da Escola Superior de Tecnologia e Gestão Jean Piaget. "
+                    f"Olá {user_label}! Eu sou o PyaGPT, o assistente virtual da Escola Superior de Tecnologia e Gestão Jean Piaget. "
                     "Como posso ajudá-lo hoje?"
                 )
                 st.session_state.messages.insert(0, {
@@ -91,29 +92,29 @@ def chat_page():
     def capitalize_first_letter(text):
         return text.capitalize() if text else text
 
+    def get_current_time():
+        tz = pytz.timezone('Europe/Lisbon')
+        current_time_utc = datetime.now(pytz.utc)
+        current_time_local = current_time_utc.astimezone(tz)
+        # Print the local time to help diagnose the issue
+        print(f"Hora Local Atual: {current_time_local.strftime('%H:%M:%S')}")
+        return current_time_local.strftime('%H:%M')
+
     for message in st.session_state.messages:
         if message["role"] != "system":
             avatar = "🤖" if message["role"] == "assistant" else "😎"
-            label = "PyaGPT" if message["role"] == "assistant" else capitalize_first_letter(st.session_state.username) if st.session_state.get('logged_in') else "Convidado"
+            label = "PyaGPT" if message["role"] == "assistant" else capitalize_first_letter(st.session_state.username) if st.session_state.get('logged_in') else "**Convidado**"
             with message_container.chat_message(message["role"], avatar=avatar):
-                st.markdown(
-                    f"<div style='display: flex; align-items: center; width: 100%;'>"
-                    f"<span style='margin-right: 8px;'><strong>{label}:</strong></span>"
-                    f"<span style='flex-grow: 1;'>{message['content']}</span></div>",
-                    unsafe_allow_html=True
-                )
+                time_stamp = get_current_time()
+                st.markdown(f"**{label}:** {message['content']} <span style='float: right;'>{time_stamp}</span>", unsafe_allow_html=True)
 
     if prompt := st.chat_input("Introduza uma pergunta aqui..."):
         try:
-            user_label = capitalize_first_letter(st.session_state.username) if st.session_state.get('logged_in') else "Convidado"
+            user_label = capitalize_first_letter(st.session_state.username) if st.session_state.get('logged_in') else "**Convidado**"
             st.session_state.messages.append({"role": "user", "content": prompt})
             with message_container.chat_message("user", avatar="😎"):
-                st.markdown(
-                    f"<div style='display: flex; align-items: center; width: 100%;'>"
-                    f"<span style='margin-right: 8px;'><strong>{user_label}:</strong></span>"
-                    f"<span style='flex-grow: 1;'>{prompt}</span></div>",
-                    unsafe_allow_html=True
-                )
+                time_stamp = get_current_time()
+                st.markdown(f"**{user_label}:** {prompt} <span style='float: right;'>{time_stamp}</span>", unsafe_allow_html=True)
 
             context = ""
 
@@ -146,29 +147,15 @@ def chat_page():
                         )
                         spinner_placeholder.empty()
 
-                        response_placeholder.markdown(
-                            f"<div style='display: flex; align-items: center; width: 100%;'>"
-                            f"<span style='margin-right: 8px;'><strong>PyaGPT:</strong></span>"
-                            f"<span style='flex-grow: 1;'></span></div>",
-                            unsafe_allow_html=True
-                        )
+                        response_placeholder.markdown(f"**PyaGPT:** ", unsafe_allow_html=True)
 
                         for chunk in stream:
                             delta_content = chunk.choices[0].delta.content
                             response += delta_content
-                            response_placeholder.markdown(
-                                f"<div style='display: flex; align-items: center; width: 100%;'>"
-                                f"<span style='margin-right: 8px;'><strong>PyaGPT:</strong></span>"
-                                f"<span style='flex-grow: 1;'>{response}▌</span></div>",
-                                unsafe_allow_html=True
-                            )
+                            response_placeholder.markdown(f"**PyaGPT:** {response}▌", unsafe_allow_html=True)
 
-                response_placeholder.markdown(
-                    f"<div style='display: flex; align-items: center; width: 100%;'>"
-                    f"<span style='margin-right: 8px;'><strong>PyaGPT:</strong></span>"
-                    f"<span style='flex-grow: 1;'>{response}</span></div>",
-                    unsafe_allow_html=True
-                )
+                time_stamp = get_current_time()
+                response_placeholder.markdown(f"**PyaGPT:** {response} <span style='float: right;'>{time_stamp}</span>", unsafe_allow_html=True)
 
             st.session_state.messages.append({"role": "assistant", "content": response})
 
@@ -181,13 +168,30 @@ def chat_page():
             log_message("error", str(e))  # Log errors as well
 
 def log_message(role, content):
-    log_path = "chat_log.txt"
-    with open(log_path, "a") as log_file:
+    # Ensure logs directory exists
+    log_dir = 'logs'
+    if not os.path.exists(log_dir):
+        os.makedirs(log_dir)
+
+    log_file = os.path.join(log_dir, 'chat_log.txt')
+    with open(log_file, 'a', encoding='utf-8') as f:
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        log_file.write(f"{timestamp} [{role.upper()}]: {content}\n")
+        f.write(f"{timestamp} - {role.capitalize()}: {content}\n")
 
 def format_contatos(contatos_info):
-    formatted_contatos = "Contatos Importantes:\n"
-    for contact in contatos_info:
-        formatted_contatos += f"- {contact['name']}: {contact['phone']} ({contact['email']})\n"
-    return formatted_contatos
+    formatted_contacts = []
+    for contato in contatos_info:
+        formatted_contacts.append(
+            f"**Instituto:** {contato.get('instituto', 'Informações não disponíveis')}\n"
+            f"**Tipo:** {contato.get('tipo', 'Informações não disponíveis')}\n"
+            f"**Nome:** {contato.get('nome', 'Informações não disponíveis')}\n"
+            f"**Morada:** {contato.get('morada', 'Informações não disponíveis')}\n"
+            f"**Código Postal:** {contato.get('codigo_postal', 'Informações não disponíveis')}\n"
+            f"**Telefone:** {contato.get('telefone', 'Informações não disponíveis')}\n"
+            f"**Fax:** {contato.get('fax', 'Informações não disponíveis')}\n"
+            f"**Email:** {contato.get('email', 'Informações não disponíveis')}\n"
+            f"**GPS:** {contato.get('gps', 'Informações não disponíveis')}\n"
+            f"**Skype:** {contato.get('skype', 'Informações não disponíveis')}\n"
+            f"**Horário:** {contato.get('horario', 'Informações não disponíveis')}\n"
+        )
+    return "\n".join(formatted_contacts)

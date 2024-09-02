@@ -24,8 +24,8 @@ def logout():
         del st.session_state[key]
 
 def main():
-    page_icon("?")
-    st.subheader("Login")
+    st.title("PyaGPT - Página de Login")
+    st.subheader("Inicie sessão na sua conta do Instituto Piaget!", divider="red", anchor=False)
 
     if 'logged_in' not in st.session_state:
         st.session_state.logged_in = False

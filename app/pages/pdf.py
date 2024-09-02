@@ -35,8 +35,8 @@ def extract_text_from_pdf(file_upload) -> str:
     return text
 
 def main():
-    st.title("PyaGPT - PDF's")
-    st.subheader("Interact with LLaVA models", divider="red", anchor=False)
+    st.title("PyaGPT - Análise de Documentos PDF")
+    st.subheader("Envie documentos PDFs para serem interpretados pelo PyaGPT!", divider="red", anchor=False)
 
     server_url = fetch_server_url()
     if not server_url:

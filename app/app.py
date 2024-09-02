@@ -2,16 +2,27 @@ import streamlit as st
 from pages.chat import chat_page
 from pages.login import logout, main as login_page
 from pages.img import main as img_page
-from pages.settings import main as settings_main
 from pages.pdf import main as pdf_page 
 
 # Set page configuration
 st.set_page_config(
     page_title="PyaGPT",
-    page_icon=":guardsman:",
+    page_icon="🤖",
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+# CSS to hide the 'Deploy' button in the Streamlit interface
+hide_deploy_button_css = """
+    <style>
+        #MainMenu {visibility: hidden;}  /* Hides the main menu (hamburger menu) */
+        header {visibility: hidden;}  /* Hides the header */
+        footer {visibility: hidden;}  /* Hides the footer */
+    </style>
+"""
+
+# Add the CSS to the Streamlit app
+st.markdown(hide_deploy_button_css, unsafe_allow_html=True)
 
 def main():
     st.sidebar.title("Navegação")
@@ -21,7 +32,6 @@ def main():
 
     pages = {
         "Chat": chat_page,
-        "Teste menu 2": settings_main,
         "Login": login_page
     }
 

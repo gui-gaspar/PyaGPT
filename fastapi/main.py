@@ -45,46 +45,52 @@ class LoginRequest(BaseModel):
 async def root():
     return {
         "message": "Bem-vindo ao backend FastAPI do PyaGPT!",
-        "description": "Este backend fornece APIs para interagir com uma base de dados Neo4j, autenticação de utilizadores, e integração com modelos da OpenAI. "
-                       "Utilize as várias rotas disponíveis para obter informações sobre a escola, dados pessoais, e muito mais.",
+        "description": "Este backend fornece APIs para interagir com a base de dados Neo4j, fazer a integração com os modelos do Ollama e comunicar com o Streamlit. "
+                       "Utilize os vários endpoints disponíveis para obter as diversas informações a serem interpretadas pelo nosso frontend",
         "endpoints": {
-            "/server_url": "Obtém o URL do servidor usado para inicializar o cliente OpenAI.",
-            "/server_url_generate": "Obtém o URL usado para requisições de geração de texto via API.",
-            "/modelos": "Lista os modelos disponíveis no servidor OpenAI configurado.",
-            "/login": "Autentica um utilizador com nome de utilizador e senha.",
-            "/escola_info": "Obtém informações detalhadas sobre a escola específica.",
-            "/personal_info/{username}": "Obtém informações pessoais detalhadas para um utilizador específico."
+            "/server_url": "Obtém o URL do servidor usado para inicializar o cliente Ollama.",
+            "/server_url_generate": "Fornece o URL utilizado para fazer pedidos à API de geração de texto por interpretação de imagens.",
+            "/modelos": "Lista os modelos Ollama disponíveis a serem utilizados no PyaGPT.",
+            "/contatos": "Obtém a lista de contatos disponíveis de todos os Institutos.",
+            "/cursos": "Lista todos os cursos disponíveis e a escola nele associada.",
+            "/curso_info": "Obtém informações detalhadas sobre cada curso.",
+            "/horarios":"Mostra os horários dos cursos do Instituto Piaget.",
+            "/plano_estudos": "Apresenta o plano de estudos dos Cursos.",
+            "/escolas": "Fornece a lista de todas as escola do Instituto Piaget.",
+            "/institutos": "Obtém a lista dos institutos disponíveis.",
+            "/orgaos_de_gestao": "Retorna informações sobre os Órgãos de Gestão de cada Instituto.",
+            "/utilizadores": "Lista todos os utilizadores disponíveis na base de dados.",
+            "/utilizadores/{username}": "Lista um utilizador especifico disponível na base de dados."
         }
-
     }
 
 
 @app.get("/server_url")
 async def get_server_url():
     try:
-        # Return server URL and additional info
+        # Retorna o URL do servidor e informações adicionais
         return {
             "server_url": server_url,
-            "message": "This endpoint returns the server URL used for OpenAI client initialization.",
-            "status": "success"
+            "message": "Este endpoint retorna o URL do servidor utilizado para a inicialização do cliente OpenAI.",
+            "status": "sucesso"
         }
     except Exception as e:
-        # Handle unexpected errors
-        raise HTTPException(status_code=500, detail=f"An unexpected error occurred: {str(e)}")
-    
+        # Lida com erros inesperados
+        raise HTTPException(status_code=500, detail=f"Ocorreu um erro inesperado: {str(e)}")
+
 @app.get("/server_url_generate")
-async def get_server_url():
+async def get_server_url_generate():
     try:
-        # Return server URL and additional info
+        # Retorna o URL do servidor de geração e informações adicionais
         return {
             "server_url_generate": server_url_generate,
-            "message": "This endpoint provides the URL used for making generation API requests.",
-            "status": "success"
+            "message": "Este endpoint fornece o URL utilizado para fazer pedidos à API de geração de texto por interpretação de imagens.",
+            "status": "sucesso"
         }
     except Exception as e:
-        # Handle unexpected errors
-        raise HTTPException(status_code=500, detail=f"An unexpected error occurred: {str(e)}")
-    
+        # Lida com erros inesperados
+        raise HTTPException(status_code=500, detail=f"Ocorreu um erro inesperado: {str(e)}")
+
 @app.get("/modelos")
 async def get_modelos():
     try:

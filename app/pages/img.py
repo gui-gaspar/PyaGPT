@@ -48,8 +48,8 @@ def get_allowed_model_names(modelos_info):
     )
 
 def main():
-    st.title("PyaGPT - Imagens")
-    st.subheader("Interact with LLaVA models", divider="red", anchor=False)
+    st.title("PyaGPT - Análise de Imagens")
+    st.subheader("Faça o upload de imagens para serem interpretadas pelo PyaGPT!", divider="red", anchor=False)
 
     server_url = fetch_server_url()
     if not server_url:
