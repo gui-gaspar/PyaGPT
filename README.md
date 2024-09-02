@@ -4,10 +4,12 @@ O projeto PyaGPT é uma aplicação inovadora que utiliza diversas tecnologias p
 Os modelos do Ollama devem ser previamente instalados.
 
 É recomendado utilizar os seguintes modelos:
+
 •   https://ollama.com/library/llama3.1 (para o chat em geral)
 •   https://ollama.com/library/llava (para a análise de imagens e pdfs)
 
 Podem ser instalados através dos comandos:
+
 •   ollama run llama3.1
 •   ollama run llava
 
