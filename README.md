@@ -5,7 +5,7 @@ Os modelos do Ollama devem ser previamente instalados.
 
 É recomendado utilizar os seguintes modelos:
 
-c  https://ollama.com/library/llama3.1 (para o chat em geral)
+•  https://ollama.com/library/llama3.1 (para o chat em geral)
 
 •   https://ollama.com/library/llava (para a análise de imagens e pdfs)
 
