@@ -41,15 +41,16 @@ Para executar o PyaGPT, siga um dos seguintes procedimentos:
    docker-compose up --build
    ```
 
-2. Alternativamente, utilize o script:
+2. Alternativamente, utilize o script localizado na `root` do projeto:
    ```bash
    run_docker.bat
    ```
 
-## População da Base de Dados Neo4j
+## Importar dados para a Base de Dados Neo4j
 
-Os dados do Neo4j devem ser carregados na seguinte ordem, utilizando os scripts SQL disponíveis na pasta `sql`:
+Os dados do Neo4j devem ser carregados utilizando os scripts SQL disponíveis na pasta `sql`:
 
-1. `1_importar_dados.sql`
-2. `2_importar_relacoes.sql`
+1. `importar_dados.sql`
+2. `importar_relacoes.sql`
 
+Apenas é necessário copiar o seu conteúdo para a `prompt` do Neo4j para serem importados todos os dados referentes ao Instituto Piaget e informações pessoais dos utilizadores.
