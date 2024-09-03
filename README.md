@@ -1,4 +1,4 @@
-# PyaGPT
+# PyaGPT - Assistente Virtual do Instituto Piaget
 
 O projeto **PyaGPT** é uma aplicação inovadora que utiliza diversas tecnologias para criar um assistente virtual especializado em fornecer informações sobre o Instituto Piaget. A interface de utilizador é desenvolvida em Streamlit, enquanto o backend é gerido pelo FastAPI, garantindo uma comunicação eficiente entre os diversos componentes do sistema. A base de dados gráfica Neo4j armazena todas as informações essenciais sobre o instituto, como contatos e cursos, e ao mesmo tempo, informações especificas para os utilizadores conectados, como as suas informações básicas e horários do curso, permitindo assim obter sempre respostas contextuais e personalizadas. A integração com a API da Ollama permite o uso de modelos de linguagem avançados para responder às perguntas dos utilizadores de forma mais precisa e relevante. O PyaGPT é, assim, uma ferramenta interativa, fácil e eficiente, ideal para facilitar o acesso a informações institucionais do Piaget.
 
