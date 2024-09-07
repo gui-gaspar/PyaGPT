@@ -122,6 +122,20 @@ async def login(request: LoginRequest):
             return {"valid": True}
         return {"valid": False}
 
+@app.get("/nome_completo/{username}")
+async def get_nome_completo(username: str):
+    query = """
+    MATCH (u:Utilizadores {username: $username})
+    RETURN u.nome_completo AS nome_completo
+    """
+    with driver.session() as session:
+        result = session.run(query, username=username)
+        user = result.single()
+        if user:
+            return {"nome_completo": user["nome_completo"]}
+        return {"nome_completo": None}
+
+
 # Endpoints para Nodes
 
 @app.get("/contatos")
@@ -130,7 +144,7 @@ async def get_contatos():
     MATCH (c:Contato)
     RETURN c.instituto AS instituto, c.tipo AS tipo, c.morada AS morada, 
            c.codigo_postal AS codigo_postal, c.telefone AS telefone, c.fax AS fax, 
-           c.email AS email, c.gps AS gps, c.nome AS nome, c.skype AS skype, 
+           c.email AS email, c.gps AS gps, c.skype AS skype, 
            c.horario AS horario
     """
     with driver.session() as session:

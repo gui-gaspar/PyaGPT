@@ -1,24 +1,24 @@
 Instituto,Tipo,Morada,Codigo_Postal,Telefone,Fax,Email,GPS,Skype,Horario
-Instituto Piaget de Almada,Geral,Avenida Jorge Peixinho n.º 30 — Quinta da Arreinela,2805-059 ALMADA,212 946 250,212 946 251,info@almada.ipiaget.pt,38.6664 -9.1769,,
-Instituto Piaget de Almada,Serviços Académicos,,,"212 946 261",,sa.almada@ipiaget.pt,,SA-IP-Almada,"Segunda-feira: 14H00–16H00; Terça-feira: 10H00–12H00; Quarta-feira: 14H00—16H00; Quinta-feira: 10H00–12H00; Sexta-feira: 16H00—18H00"
-Instituto Piaget de Silves,Geral,Jardim nº1 do Enxerim,8300-025 Silves,282 440 170,,info@silves.ipiaget.pt,37.1964 -8.4336,,
-Instituto Piaget de Silves,Serviços Académicos,,,"282 440 170",,servicos.academicos@silves.ipiaget.pt,SA-IP-Silves,,"De segunda a sexta-feira das 9H30 às 12H00; Terça e quinta-feira das 14H00 às 16H00"
-Instituto Piaget de Vila Nova de Gaia,Geral,Alameda Jean Piaget 242,4405-678 — Vila Nova de Gaia,227 536 620,,info@gaia.ipiaget.pt,41.0783 -8.635,,
-Instituto Piaget de Vila Nova de Gaia,Serviços Académicos,,,"227 536 620 / 227 536 626",,sa.gaia@ipiaget.pt,,,"Segunda a sexta-feira das 10H–13H; Atendimento telefónico: De segunda a sexta-feira, das 9H–12H e das 13H–18H"
-Instituto Piaget de Vila Nova de Gaia,Biblioteca,,,"227 536 634",,sdi@gaia.ipiaget.pt,,,,"Segunda a sexta-feira: das 9H–12H30 e das 13H30 às 18H"
-Instituto Piaget de Vila Nova de Gaia,Divisão Tecnológica,,,"227 536 624",,dt.suporte@ipiaget.pt,,,"segunda a sexta-feira: 9H00–13H00 e das 14H00–18H00"
-Instituto Piaget de Vila Nova de Gaia,Provedor do Estudante,,,,,"provedor.estudante@gaia.ipiaget.pt",,,"segunda-feira a sexta-feira: 9H–12h40 e 14H–18H"
-Instituto Piaget de Vila Nova de Gaia,Serviços de Ação Social,,,"227 536 632",,sandra.carvalho@ipiaget.pt,,,"segunda-feira a sexta-feira: 9H–12h40 e 14H–18H"
-Instituto Piaget de Vila Nova de Gaia,Livraria,,,"227 536 634",,livraria@gaia.ipiaget.pt,,,"Segunda a sexta-feira: das 9H–12H30 e das 13H30 às 18H"
-Instituto Piaget de Vila Nova de Gaia,Bar/ Cantina,,,"227 536 630",,fernando.mira@ipiaget.pt,,,"Horário a consultar no local"
-Instituto Piaget de Vila Nova de Gaia,Gabinete de Acolhimento ao Candidato,,,,,,,,"Segunda a sexta-feira das 9H-12H e 13H-17H30"
-Instituto Piaget de Vila Nova de Gaia,Gabinete de Estágios,,,"227 536 637",,estagios@gaia.ipiaget.pt,,,"segunda-feira a sexta-feira: 09h00–12h40 e 14h00–18h00"
-Instituto Piaget de Vila Nova de Gaia,Gabinete de Horários,,,"227 536 634",,horarios@gaia.ipiaget.pt,,,"segunda-feira a sexta-feira: 9H–12H40 e 14H–18H"
-Instituto Piaget de Vila Nova de Gaia,Gabinete de Mobilidade Internacional,,,"227 536 637",,mobilidade@gaia.ipiaget.pt,,,"Terça-feira, das 15H00 às 17H00"
-Instituto Piaget de Vila Nova de Gaia,Gabinete de Formação Pós-Graduada da Escola Superior de Desporto e Educação,,,,,sec.fpg.esde.gaia@ipiaget.pt,
-Instituto Piaget de Vila Nova de Gaia,Gabinete de Formação Pós-Graduada da Escola Superior de Saúde,,,"227 536 637",,sec.fpg.ess.gaia@ipiaget.pt,,,"segunda-feira a sexta-feira: 9H–12H40 e 14H–18H"
-Instituto Piaget de Vila Nova de Gaia,Gabinete de Apoio à Inserção na Vida Activa,,,"227 536 637",,gaiva@gaia.ipiaget.pt,,,"segunda-feira a sexta-feira: 9H–12h40 e 14H–18H"
-Instituto Piaget de Viseu,Geral,Estrada do Alto do Gaio,3515-776 Galifonge Lordosa – Viseu,232 910 100,,info@viseu.ipiaget.pt,40°44’12.3″N 7°56’21.6″W,,
-Instituto Piaget de Viseu,Serviços Académicos,,,"232 910 104",,servicos.academicos@viseu.ipiaget.pt,,SA-IP-Viseu,"segunda-feira: 9H00–13H00; terça a sexta-feira: 9H00–13H00 e das 14H00–16H00; sábado (primeiro de cada mês): 09H00–13H00"
-Instituto Piaget de Viseu,Biblioteca,,,,,sdi@viseu.ipiaget.pt,,,"Segunda-feira e sábado: 9H00–12H00 e das 13H00–18H00; Terça-feira a sexta-feira: 9H00–18h00"
-Instituto Piaget de Viseu,Livraria,,,,,,,,"Terça-feira a Sábado: 09h00–13h00 e 14h00–18h00"
+Instituto Piaget de Almada,Geral,Avenida Jorge Peixinho n.º 30 — Quinta da Arreinela,2805-059 ALMADA,212 946 250,212 946 251,info@almada.ipiaget.pt,38.6664 -9.1769,N/D,N/D
+Instituto Piaget de Almada,Serviços Académicos,N/D,N/D,212 946 261,N/D,sa.almada@ipiaget.pt,N/D,SA-IP-Almada,"Segunda-feira: 14H00–16H00; Terça-feira: 10H00–12H00; Quarta-feira: 14H00—16H00; Quinta-feira: 10H00–12H00; Sexta-feira: 16H00—18H00"
+Instituto Piaget de Silves,Geral,Jardim nº1 do Enxerim,8300-025 Silves,282 440 170,N/D,info@silves.ipiaget.pt,37.1964 -8.4336,N/D,N/D
+Instituto Piaget de Silves,Serviços Académicos,N/D,N/D,282 440 170,N/D,servicos.academicos@silves.ipiaget.pt,SA-IP-Silves,N/D,"De segunda a sexta-feira das 9H30 às 12H00; Terça e quinta-feira das 14H00 às 16H00"
+Instituto Piaget de Vila Nova de Gaia,Geral,Alameda Jean Piaget 242,4405-678 — Vila Nova de Gaia,227 536 620,N/D,info@gaia.ipiaget.pt,41.0783 -8.635,N/D,N/D
+Instituto Piaget de Vila Nova de Gaia,Serviços Académicos,N/D,N/D,"227 536 620 / 227 536 626",N/D,sa.gaia@ipiaget.pt,N/D,"Segunda a sexta-feira das 10H–13H; Atendimento telefónico: De segunda a sexta-feira, das 9H–12H e das 13H–18H"
+Instituto Piaget de Vila Nova de Gaia,Biblioteca,N/D,N/D,"227 536 634",N/D,sdi@gaia.ipiaget.pt,N/D,N/D,"Segunda a sexta-feira: das 9H–12H30 e das 13H30 às 18H"
+Instituto Piaget de Vila Nova de Gaia,Divisão Tecnológica,N/D,N/D,"227 536 624",N/D,dt.suporte@ipiaget.pt,N/D,N/D,"segunda a sexta-feira: 9H00–13H00 e das 14H00–18H00"
+Instituto Piaget de Vila Nova de Gaia,Provedor do Estudante,N/D,N/D,N/D,N/D,provedor.estudante@gaia.ipiaget.pt,N/D,N/D,"segunda-feira a sexta-feira: 9H–12h40 e 14H–18H"
+Instituto Piaget de Vila Nova de Gaia,Serviços de Ação Social,N/D,N/D,"227 536 632",N/D,sandra.carvalho@ipiaget.pt,N/D,N/D,"segunda-feira a sexta-feira: 9H–12h40 e 14H–18H"
+Instituto Piaget de Vila Nova de Gaia,Livraria,N/D,N/D,"227 536 634",N/D,livraria@gaia.ipiaget.pt,N/D,N/D,"Segunda a sexta-feira: das 9H–12H30 e das 13H30 às 18H"
+Instituto Piaget de Vila Nova de Gaia,Bar/ Cantina,N/D,N/D,"227 536 630",N/D,fernando.mira@ipiaget.pt,N/D,N/D,"Horário a consultar no local"
+Instituto Piaget de Vila Nova de Gaia,Gabinete de Acolhimento ao Candidato,N/D,N/D,N/D,N/D,N/D,N/D,N/D,"Segunda a sexta-feira das 9H-12H e 13H-17H30"
+Instituto Piaget de Vila Nova de Gaia,Gabinete de Estágios,N/D,N/D,"227 536 637",N/D,estagios@gaia.ipiaget.pt,N/D,N/D,"segunda-feira a sexta-feira: 09h00–12h40 e 14h00–18h00"
+Instituto Piaget de Vila Nova de Gaia,Gabinete de Horários,N/D,N/D,"227 536 634",N/D,horarios@gaia.ipiaget.pt,N/D,N/D,"segunda-feira a sexta-feira: 9H–12H40 e 14H–18H"
+Instituto Piaget de Vila Nova de Gaia,Gabinete de Mobilidade Internacional,N/D,N/D,"227 536 637",N/D,mobilidade@gaia.ipiaget.pt,N/D,N/D,"Terça-feira, das 15H00 às 17H00"
+Instituto Piaget de Vila Nova de Gaia,Gabinete de Formação Pós-Graduada da Escola Superior de Desporto e Educação,N/D,N/D,N/D,N/D,N/D,sec.fpg.esde.gaia@ipiaget.pt,N/D,N/D,N/D
+Instituto Piaget de Vila Nova de Gaia,Gabinete de Formação Pós-Graduada da Escola Superior de Saúde,N/D,N/D,"227 536 637",N/D,sec.fpg.ess.gaia@ipiaget.pt,N/D,N/D,"segunda-feira a sexta-feira: 9H–12H40 e 14H–18H"
+Instituto Piaget de Vila Nova de Gaia,Gabinete de Apoio à Inserção na Vida Activa,N/D,N/D,"227 536 637",N/D,gaiva@gaia.ipiaget.pt,N/D,N/D,"segunda-feira a sexta-feira: 9H–12h40 e 14H–18H"
+Instituto Piaget de Viseu,Geral,Estrada do Alto do Gaio,3515-776 Galifonge Lordosa – Viseu,232 910 100,N/D,info@viseu.ipiaget.pt,40°44’12.3″N 7°56’21.6″W,N/D,N/D
+Instituto Piaget de Viseu,Serviços Académicos,N/D,N/D,232 910 104,N/D,servicos.academicos@viseu.ipiaget.pt,N/D,SA-IP-Viseu,"segunda-feira: 9H00–13H00; terça a sexta-feira: 9H00–13H00 e das 14H00–16H00; sábado (primeiro de cada mês): 09H00–13H00"
+Instituto Piaget de Viseu,Biblioteca,N/D,N/D,N/D,N/D,sdi@viseu.ipiaget.pt,N/D,N/D,"Segunda-feira e sábado: 9H00–12H00 e das 13H00–18H00; Terça-feira a sexta-feira: 9H00–18h00"
+Instituto Piaget de Viseu,Livraria,N/D,N/D,N/D,N/D,N/D,N/D,N/D,"Terça-feira a Sábado: 09h00–13h00 e 14h00–18h00"

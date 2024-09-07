@@ -11,7 +11,7 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
-
+st.cache_data.clear()
 # CSS to hide the 'Deploy' button in the Streamlit interface
 hide_deploy_button_css = """
     <style>
@@ -52,11 +52,12 @@ def main():
     st.sidebar.divider()
 
     if st.session_state.get('logged_in'):
-        username = st.session_state.username.capitalize()
-        st.sidebar.markdown(f"Bem-vindo, **{username}**!")
+        nome_completo = st.session_state.nome_completo
+        st.sidebar.markdown(f"Bem-vindo, **{nome_completo}**!")
         if st.sidebar.button("Logout", key="logout_sidebar_button"):
             st.session_state.logged_in = False
             st.session_state.username = None
+            st.session_state.nome_completo = None
             logout()
             st.rerun()
     else:

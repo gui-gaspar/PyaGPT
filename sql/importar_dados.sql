@@ -14,7 +14,6 @@ CREATE (c:Contato {
     fax: row.Fax,
     email: row.Email,
     gps: row.GPS,
-    nome: row.Nome,
     skype: row.Skype,
     horario: row.Horario
 });

@@ -6,7 +6,7 @@ import os
 
 # FastAPI server URL
 FASTAPI_URL = os.getenv("FASTAPI_URL", "http://fastapi:8000")
-
+st.cache_data.clear()
 # Load API key from configuration file
 def load_api_key():
     try:
@@ -81,7 +81,6 @@ def format_contatos(contatos: list) -> str:
         formatted_contatos.append(
             f"**Instituto:** {contato.get('instituto', 'Informações não disponíveis')}\n"
             f"**Tipo:** {contato.get('tipo', 'Informações não disponíveis')}\n"
-            f"**Nome:** {contato.get('nome', 'Informações não disponíveis')}\n"
             f"**Morada:** {contato.get('morada', 'Informações não disponíveis')}\n"
             f"**Código Postal:** {contato.get('codigo_postal', 'Informações não disponíveis')}\n"
             f"**Telefone:** {contato.get('telefone', 'Informações não disponíveis')}\n"
