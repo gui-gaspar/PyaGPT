@@ -1,11 +1,12 @@
 import os
+import pandas as pd
 import streamlit as st
 from datetime import datetime
 import pytz
 import requests
 from utils import (
     fetch_contatos, fetch_cursos, fetch_server_url, get_modelos_info, extract_model_names, get_openai_client,
-    fetch_curso_info, fetch_plano_estudos, fetch_escolas, fetch_institutos, fetch_orgaos_gestao
+    fetch_curso_info, fetch_horarios, fetch_plano_estudos, fetch_escolas, fetch_institutos, fetch_orgaos_gestao
 )
 
 # Clear cached data if necessary
@@ -71,7 +72,11 @@ def chat_page():
     if "orgaos_gestao" not in st.session_state:
         st.session_state.orgaos_gestao = fetch_orgaos_gestao()
 
+    if st.session_state.get('logged_in') and "horarios" not in st.session_state:
+        st.session_state.horarios = fetch_horarios()
+
     # Formatting functions
+
     def format_cursos(cursos: list) -> str:
         if not cursos:
             return "Não há informações de cursos disponíveis."
@@ -160,6 +165,37 @@ def chat_page():
             else:
                 formatted_orgaos_gestao.append("Informação de órgão de gestão inválida.")
         return "\n".join(formatted_orgaos_gestao)
+    
+    def format_horarios(horarios: list) -> pd.DataFrame:
+        if not horarios:
+            return pd.DataFrame(columns=['Ano Acadêmico', 'Curso', 'Cadeira', 'Dia do Mês', 'Mês', 'Ano', 'Dia', 'Hora Início', 'Hora Fim'])
+        formatted_horarios = []
+        for horario in horarios:
+            if isinstance(horario, dict):
+                formatted_horarios.append({
+                    'Ano Acadêmico': horario.get('ano_academico', 'Informações não disponíveis'),
+                    'Curso': horario.get('curso', 'Informações não disponíveis'),
+                    'Cadeira': horario.get('cadeira', 'Informações não disponíveis'),
+                    'Dia do Mês': horario.get('dia_do_mes', 'Informações não disponíveis'),
+                    'Mês': horario.get('mes', 'Informações não disponíveis'),
+                    'Ano': horario.get('ano', 'Informações não disponíveis'),
+                    'Dia': horario.get('dia', 'Informações não disponíveis'),
+                    'Hora Início': horario.get('hora_inicio', 'Informações não disponíveis'),
+                    'Hora Fim': horario.get('hora_fim', 'Informações não disponíveis')
+                })
+            else:
+                formatted_horarios.append({
+                    'Ano Acadêmico': 'Informações não disponíveis',
+                    'Curso': 'Informações não disponíveis',
+                    'Cadeira': 'Informações não disponíveis',
+                    'Dia do Mês': 'Informações não disponíveis',
+                    'Mês': 'Informações não disponíveis',
+                    'Ano': 'Informações não disponíveis',
+                    'Dia': 'Informações não disponíveis',
+                    'Hora Início': 'Informações não disponíveis',
+                    'Hora Fim': 'Informações não disponíveis'
+                })
+        return pd.DataFrame(formatted_horarios)
 
     # Adicionar as informações de contato na mensagem do sistema
     if st.session_state.get("contatos_info"):
@@ -255,6 +291,18 @@ def chat_page():
                 "Você é o assistente virtual PyaGPT do Instituto Piaget. "
                 "Responda em Português de Portugal e utilize as informações detalhadas sobre os órgãos de gestão. "
                 f"{orgaos_gestao_formatted}\n"
+                "Responda a perguntas sobre a escola usando as informações fornecidas."
+            )
+        }
+    elif st.session_state.get("horarios_info"):
+        horarios_info = st.session_state.horarios_info
+        horarios_formatted = format_horarios(horarios_info)
+        st.session_state.system_message = {
+            "role": "system",
+            "content": (
+                "Você é o assistente virtual PyaGPT do Instituto Piaget. "
+                "Responda em Português de Portugal e utilize as informações detalhadas sobre os horários. "
+                f"{horarios_formatted}\n"
                 "Responda a perguntas sobre a escola usando as informações fornecidas."
             )
         }

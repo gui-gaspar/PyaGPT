@@ -1225,3 +1225,16 @@ Os contatos atuais do Instituto Piaget de Almada são:
 **Email:** info@almada.ipiaget.pt
 
 Obrigado por querer contactar-nos! Estamos aqui para ajudá-lo.
+2024-09-11 10:53:28 - User: quais os contatos do instituto piaget de almada?
+2024-09-11 10:53:28 - Assistant: Os contatos do Instituto Piaget de Almada são:
+
+**Instituto:** Instituto Piaget de Almada
+**Tipo:** Geral
+**Morada:** Avenida Jorge Peixinho n.º 30 — Quinta da Arreinela
+**Código Postal:** 2805-059 ALMADA
+**Telefone:** 212 946 250
+**Fax:** 212 946 251
+**Email:** info@almada.ipiaget.pt
+**GPS:** 38.6664 -9.1769
+
+É possível contactar o Instituto Piaget de Almada em algum dos títulos fornecidos acima!
