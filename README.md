@@ -9,6 +9,14 @@ O projeto **PyaGPT** é uma aplicação inovadora que utiliza diversas tecnologi
 - **Base de Dados**: Utiliza a base de dados gráfica **Neo4j** para armazenar informações essenciais sobre o Instituto, como contactos e cursos, bem como dados específicos dos utilizadores, como informações pessoais e horários dos cursos. Isto permite que o sistema forneça respostas contextuais e personalizadas.
 - **Modelos de Linguagem**: Integrado com a **API do Ollama** para utilizar modelos de linguagem avançados, oferecendo respostas precisas e relevantes às questões dos utilizadores.
 
+## Clonar o Repositório do PyaGPT
+
+Para obter o código-fonte do projeto PyaGPT, execute o seguinte comando na sua shell:
+
+```bash
+git clone https://github.com/gui-gaspar/PyaGPT
+```
+
 ## Instalação dos Modelos Ollama
 
 Os modelos da Ollama devem ser instalados previamente para garantir o correto funcionamento do PyaGPT. Recomendamos a instalação dos seguintes modelos:
