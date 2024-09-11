@@ -2,12 +2,20 @@ import os
 import streamlit as st
 from datetime import datetime
 import pytz
+import requests
 from utils import (
-    fetch_contatos, fetch_cursos, fetch_server_url, get_modelos_info, extract_model_names, get_openai_client
+    fetch_contatos, fetch_cursos, fetch_server_url, get_modelos_info, extract_model_names, get_openai_client,
+    fetch_curso_info, fetch_plano_estudos, fetch_escolas, fetch_institutos, fetch_orgaos_gestao
 )
 
 # Clear cached data if necessary
 st.cache_data.clear()
+
+def get_current_time():
+    tz = pytz.timezone('Europe/Lisbon')
+    current_time_utc = datetime.now(pytz.utc)
+    current_time_local = current_time_utc.astimezone(tz)
+    return current_time_local.strftime('%H:%M')
 
 def chat_page():
     st.title("PyaGPT - Assistente Virtual do Instituto Piaget")
@@ -41,11 +49,117 @@ def chat_page():
         st.session_state.messages = []
         st.session_state.welcome_message_added = False
 
+    # Fetch informações
     if "contatos_info" not in st.session_state:
         st.session_state.contatos_info = fetch_contatos()
-
+        
     if "cursos_info" not in st.session_state:
         st.session_state.cursos_info = fetch_cursos()
+    
+    if "curso_info" not in st.session_state:
+        st.session_state.curso_info = fetch_curso_info()
+        
+    if "plano_estudos" not in st.session_state:
+        st.session_state.plano_estudos = fetch_plano_estudos()
+        
+    if "escolas" not in st.session_state:
+        st.session_state.escolas = fetch_escolas()
+        
+    if "institutos" not in st.session_state:
+        st.session_state.institutos = fetch_institutos()
+        
+    if "orgaos_gestao" not in st.session_state:
+        st.session_state.orgaos_gestao = fetch_orgaos_gestao()
+
+    # Formatting functions
+    def format_cursos(cursos: list) -> str:
+        if not cursos:
+            return "Não há informações de cursos disponíveis."
+        formatted_cursos = []
+        for curso in cursos:
+            if isinstance(curso, dict):
+                formatted_cursos.append(
+                    f"**Tipo:** {curso.get('tipo', 'Informações não disponíveis')}\n"
+                    f"**Curso:** {curso.get('curso', 'Informações não disponíveis')}\n"
+                    f"**Escola:** {curso.get('escola', 'Informações não disponíveis')}\n"
+                )
+            else:
+                formatted_cursos.append("Informação de curso inválida.")
+        return "\n".join(formatted_cursos)
+
+    def format_curso_info(curso_info: dict) -> str:
+        if not curso_info or not isinstance(curso_info, dict):
+            return "Informações do curso não disponíveis."
+        return (
+            f"**Curso:** {curso_info.get('curso', 'Informações não disponíveis')}\n"
+            f"**Saídas Profissionais:** {curso_info.get('saídas_profissionais', 'Informações não disponíveis')}\n"
+            f"**Estatuto Profissional:** {curso_info.get('estatuto_profissional', 'Informações não disponíveis')}\n"
+            f"**Apresentação:** {curso_info.get('apresentação', 'Informações não disponíveis')}\n"
+            f"**Acesso a Outros Ciclos:** {curso_info.get('acesso_a_outros_ciclos', 'Informações não disponíveis')}\n"
+            f"**Área de Estudo:** {curso_info.get('área_de_estudo', 'Informações não disponíveis')}\n"
+            f"**Regras de Avaliação:** {curso_info.get('regras_de_avaliação', 'Informações não disponíveis')}\n"
+            f"**Acesso:** {curso_info.get('acesso', 'Informações não disponíveis')}\n"
+            f"**Diploma:** {curso_info.get('diploma', 'Informações não disponíveis')}\n"
+        )
+
+    def format_plano_estudos(plano_estudos: list) -> str:
+        if not plano_estudos:
+            return "Não há informações sobre o plano de estudos disponíveis."
+        formatted_plano_estudos = []
+        for unidade in plano_estudos:
+            if isinstance(unidade, dict):
+                formatted_plano_estudos.append(
+                    f"**Ano:** {unidade.get('ano', 'Informações não disponíveis')}\n"
+                    f"**Semestre:** {unidade.get('semestre', 'Informações não disponíveis')}\n"
+                    f"**Unidade Curricular:** {unidade.get('unidade_curricular', 'Informações não disponíveis')}\n"
+                    f"**CH:** {unidade.get('ch', 'Informações não disponíveis')}\n"
+                    f"**ECTS:** {unidade.get('ects', 'Informações não disponíveis')}\n"
+                )
+            else:
+                formatted_plano_estudos.append("Informação de plano de estudos inválida.")
+        return "\n".join(formatted_plano_estudos)
+
+    def format_escolas(escolas: list) -> str:
+        if not escolas:
+            return "Nenhuma escola encontrada."
+        formatted_schools = []
+        for escola in escolas:
+            if isinstance(escola, dict):
+                formatted_schools.append(
+                    f"**Nome da Escola:** {escola.get('escola', 'N/A')}\n"
+                    f"**Descrição:** {escola.get('descricao', 'Descrição não disponível')}\n"
+                )
+            else:
+                formatted_schools.append("Informação de escola inválida.")
+        return "\n\n".join(formatted_schools)
+
+    def format_institutos(institutos: list) -> str:
+        if not institutos:
+            return "Nenhum instituto encontrado."
+        formatted_institutes = []
+        for instituto in institutos:
+            if isinstance(instituto, dict):
+                formatted_institutes.append(
+                    f"**Nome do Instituto:** {instituto.get('instituto', 'N/A')}\n"
+                )
+            else:
+                formatted_institutes.append("Informação de instituto inválida.")
+        return "\n\n".join(formatted_institutes)
+
+    def format_orgaos_gestao(orgaos_gestao: list) -> str:
+        if not orgaos_gestao:
+            return "Não há informações sobre órgãos de gestão disponíveis."
+        formatted_orgaos_gestao = []
+        for orgao in orgaos_gestao:
+            if isinstance(orgao, dict):
+                formatted_orgaos_gestao.append(
+                    f"**Escola:** {orgao.get('escola', 'Informações não disponíveis')}\n"
+                    f"**Função:** {orgao.get('função', 'Informações não disponíveis')}\n"
+                    f"**Nome:** {orgao.get('nome', 'Informações não disponíveis')}\n"
+                )
+            else:
+                formatted_orgaos_gestao.append("Informação de órgão de gestão inválida.")
+        return "\n".join(formatted_orgaos_gestao)
 
     # Adicionar as informações de contato na mensagem do sistema
     if st.session_state.get("contatos_info"):
@@ -63,36 +177,101 @@ def chat_page():
             f"**Skype:** {contatos_info[0].get('skype', 'Informações não disponíveis')}\n"
             f"**Horário:** {contatos_info[0].get('horario', 'Informações não disponíveis')}\n"
         )
-        system_message_content = (
-            "Você é o assistente virtual PyaGPT do Instituto Piaget. "
-            "Responda em Português de Portugal e utilize as informações detalhadas sobre o Instituto Piaget. "
-            f"{contatos_formatted}\n"
-        )
-    else:
-        system_message_content = (
-            "Você é o assistente virtual PyaGPT do Instituto Piaget. "
-            "Responda em Português de Portugal."
-        )
-
-    # Adicionar as informações dos cursos na mensagem do sistema
-    if st.session_state.get("cursos_info"):
+        st.session_state.system_message = {
+            "role": "system",
+            "content": (
+                "Você é o assistente virtual PyaGPT do Instituto Piaget. "
+                "Responda em Português de Portugal e utilize as informações detalhadas sobre o Instituto Piaget. "
+                f"{contatos_formatted}\n"
+                "Responda a perguntas sobre a escola usando as informações fornecidas."
+            )
+        }
+    elif st.session_state.get("cursos_info"):
         cursos_info = st.session_state.cursos_info
-        cursos_formatted = (
-            "Aqui estão os cursos atuais do Instituto Piaget:\n"
-            + "\n".join([f"**{curso['tipo']}**, **{curso['curso']}**, **{curso['escola']}**" for curso in cursos_info])
-        )
-        system_message_content += f"\n{cursos_formatted}"
-
-    st.session_state.system_message = {
-        "role": "system",
-        "content": system_message_content
-    }
+        cursos_formatted = format_cursos(cursos_info)
+        st.session_state.system_message = {
+            "role": "system",
+            "content": (
+                "Você é o assistente virtual PyaGPT do Instituto Piaget. "
+                "Responda em Português de Portugal e utilize as informações detalhadas sobre os cursos oferecidos. "
+                f"{cursos_formatted}\n"
+                "Responda a perguntas sobre a escola usando as informações fornecidas."
+            )
+        }
+    elif st.session_state.get("curso_info"):
+        curso_info = st.session_state.curso_info
+        curso_info_formatted = format_curso_info(curso_info)
+        st.session_state.system_message = {
+            "role": "system",
+            "content": (
+                "Você é o assistente virtual PyaGPT do Instituto Piaget. "
+                "Responda em Português de Portugal e utilize as informações detalhadas sobre o curso oferecido. "
+                f"{curso_info_formatted}\n"
+                "Responda a perguntas sobre a escola usando as informações fornecidas."
+            )
+        }
+    elif st.session_state.get("plano_estudos"):
+        plano_estudos = st.session_state.plano_estudos
+        plano_estudos_formatted = format_plano_estudos(plano_estudos)
+        st.session_state.system_message = {
+            "role": "system",
+            "content": (
+                "Você é o assistente virtual PyaGPT do Instituto Piaget. "
+                "Responda em Português de Portugal e utilize as informações detalhadas sobre o plano de estudos. "
+                f"{plano_estudos_formatted}\n"
+                "Responda a perguntas sobre a escola usando as informações fornecidas."
+            )
+        }
+    elif st.session_state.get("escolas"):
+        escolas = st.session_state.escolas
+        escolas_formatted = format_escolas(escolas)
+        st.session_state.system_message = {
+            "role": "system",
+            "content": (
+                "Você é o assistente virtual PyaGPT do Instituto Piaget. "
+                "Responda em Português de Portugal e utilize as informações detalhadas sobre as escolas. "
+                f"{escolas_formatted}\n"
+                "Responda a perguntas sobre a escola usando as informações fornecidas."
+            )
+        }
+    elif st.session_state.get("institutos"):
+        institutos = st.session_state.institutos
+        institutos_formatted = format_institutos(institutos)
+        st.session_state.system_message = {
+            "role": "system",
+            "content": (
+                "Você é o assistente virtual PyaGPT do Instituto Piaget. "
+                "Responda em Português de Portugal e utilize as informações detalhadas sobre os institutos. "
+                f"{institutos_formatted}\n"
+                "Responda a perguntas sobre a escola usando as informações fornecidas."
+            )
+        }
+    elif st.session_state.get("orgaos_gestao"):
+        orgaos_gestao = st.session_state.orgaos_gestao
+        orgaos_gestao_formatted = format_orgaos_gestao(orgaos_gestao)
+        st.session_state.system_message = {
+            "role": "system",
+            "content": (
+                "Você é o assistente virtual PyaGPT do Instituto Piaget. "
+                "Responda em Português de Portugal e utilize as informações detalhadas sobre os órgãos de gestão. "
+                f"{orgaos_gestao_formatted}\n"
+                "Responda a perguntas sobre a escola usando as informações fornecidas."
+            )
+        }
+    else:
+        st.session_state.system_message = {
+            "role": "system",
+            "content": (
+                "Você é o assistente virtual PyaGPT do Instituto Piaget. "
+                "Responda em Português de Portugal."
+            )
+        }
 
     # Assign user label based on login status, showing nome_completo if available
     if st.session_state.get('logged_in') and st.session_state.get('nome_completo'):
         user_label = f"**{st.session_state['nome_completo']}**"
     else:
-        user_label = f"**{st.session_state.get('username', 'Convidado').capitalize()}**"
+        user_label = "Convidado"
 
     # Handle welcome message logic
     if not st.session_state.welcome_message_added:
@@ -123,12 +302,6 @@ def chat_page():
     # Ensure system message is always in messages
     if st.session_state.system_message not in st.session_state.messages:
         st.session_state.messages.insert(1, st.session_state.system_message)
-
-    def get_current_time():
-        tz = pytz.timezone('Europe/Lisbon')
-        current_time_utc = datetime.now(pytz.utc)
-        current_time_local = current_time_utc.astimezone(tz)
-        return current_time_local.strftime('%H:%M')
 
     # Render all messages with avatars and timestamps
     for message in st.session_state.messages:

@@ -96,6 +96,7 @@ CREATE (u:Utilizadores {
     morada: 'Rua da Felicidade, 45, Almada',
     curso: 'Engenharia Informática',
     tipo_curso: 'Licenciatura',
+    ano_academico: '3º ano',
     escola: 'Escola Superior de Tecnologia e Gestão Jean Piaget Almada',
     instituto: 'Instituto Piaget de Almada', 
     tipo_utilizador: 'estudante',

@@ -115,6 +115,18 @@ def fetch_curso_info():
         st.error(f"An error occurred: {err}")
         return []
 
+def fetch_horarios():
+    try:
+        # Make the GET request without the curso parameter
+        response = requests.get(f"{FASTAPI_URL}/horarios")
+        response.raise_for_status()
+        data = response.json()
+        print("Fetched Horários:", data)  # Debugging line
+        return data
+    except requests.exceptions.RequestException as err:
+        st.error(f"An error occurred: {err}")
+        return []
+    
 def fetch_plano_estudos():
     try:
         response = requests.get(f"{FASTAPI_URL}/plano_estudos")

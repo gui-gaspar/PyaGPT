@@ -93,13 +93,16 @@ def main():
         if uploaded_file is not None:
             for message in st.session_state.chats:
                 avatar = "🤖" if message["role"] == "assistant" else "😎"
+                label = "PyaGPT" if message["role"] == "assistant" else f"**{st.session_state.get('nome_completo', 'Convidado')}**"
                 with st.chat_message(message["role"], avatar=avatar):
-                    st.markdown(message["content"])
+                    st.markdown(f"**{label}:** {message['content']}")
 
             if user_input := st.chat_input("Escreva uma pergunta sobre a imagem...", key="chat_input"):
+                # Define the label before using it
+                label = f"**{st.session_state.get('nome_completo', 'Convidado')}**"
                 st.session_state.chats.append({"role": "user", "content": user_input})
                 with st.chat_message("user", avatar="😎"):
-                    st.markdown(user_input)
+                    st.markdown(f"**{label}:** {user_input}")
 
                 image_base64 = img_to_base64(image)
                 API_URL = api_url_generate  # Use the URL fetched from the server
@@ -131,7 +134,7 @@ def main():
                                     except json.JSONDecodeError:
                                         st.warning("Received invalid JSON from the server.")
                             if llava_response:
-                                st.markdown(llava_response)
+                                st.markdown(f"**PyaGPT:** {llava_response}")
                             else:
                                 st.warning("No response received from the API.")
                         except requests.exceptions.RequestException as e:

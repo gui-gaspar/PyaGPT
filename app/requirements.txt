@@ -9,7 +9,6 @@ extra_streamlit_components
 toml
 streamlit-authenticator
 pytz
-
 pdf2image
 poppler-utils
 langchain

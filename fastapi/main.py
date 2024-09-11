@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 from neo4j import GraphDatabase
 from pydantic import BaseModel
 import toml
@@ -183,6 +183,27 @@ async def get_curso_info():
         if records:
             return records
         raise HTTPException(status_code=404, detail="No curso info found")
+    
+@app.get("/horarios")
+async def get_horarios():
+    query = """
+    MATCH (h:Horarios)
+    RETURN h.curso AS curso,
+           h.ano AS ano,
+           h.mes AS mes,
+           h.dia AS dia,
+           h.dia_do_mes AS dia_do_mes,
+           h.hora_inicio AS hora_inicio,
+           h.hora_fim AS hora_fim,
+           h.cadeira AS cadeira,
+           h.ano_academico AS ano_academico
+    """
+    with driver.session() as session:
+        result = session.run(query)
+        records = [record.data() for record in result]
+        if records:
+            return records
+        raise HTTPException(status_code=404, detail="Horários not found")
 
 @app.get("/plano_estudos")
 async def get_plano_estudos():
