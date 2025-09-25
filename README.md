@@ -1,64 +1,64 @@
-# PyaGPT - Assistente Virtual do Instituto Piaget
+# PyaGPT - Virtual Assistant of Instituto Piaget
 
-O projeto **PyaGPT** é uma aplicação inovadora que utiliza diversas tecnologias para criar um assistente virtual especializado em fornecer informações sobre o Instituto Piaget. A interface de utilizador é desenvolvida em Streamlit, enquanto o backend é gerido pelo FastAPI, garantindo uma comunicação eficiente entre os diversos componentes do sistema. A base de dados gráfica Neo4j armazena todas as informações essenciais sobre o instituto, como contatos e cursos, e ao mesmo tempo, informações especificas para os utilizadores conectados, como as suas informações básicas e horários do curso, permitindo assim obter sempre respostas contextuais e personalizadas. A integração com a API da Ollama permite o uso de modelos de linguagem avançados para responder às perguntas dos utilizadores de forma mais precisa e relevante. O PyaGPT é, assim, uma ferramenta interativa, fácil e eficiente, ideal para facilitar o acesso a informações institucionais do Piaget.
+The **PyaGPT** project is an innovative application that leverages various technologies to create a virtual assistant specialized in providing information about Instituto Piaget. The user interface is developed using Streamlit, while the backend is managed by FastAPI, ensuring efficient communication between the system's components. The Neo4j graph database stores all essential information about the institute, such as contacts and courses, as well as user-specific data, like personal information and class schedules, allowing for contextual and personalized responses. Integration with the Ollama API enables the use of advanced language models to answer user queries more accurately and relevantly. PyaGPT is thus an interactive, easy-to-use, and efficient tool, ideal for facilitating access to institutional information about Piaget.
 
-## Tecnologias Utilizadas
+## Technologies 
 
-- **Interface do Utilizador**: Desenvolvida em **Streamlit**, proporcionando uma interface interativa e fácil de utilizar.
-- **Backend**: Gerido pelo **FastAPI**, garantindo uma comunicação rápida e eficaz entre os diferentes componentes do sistema.
-- **Base de Dados**: Utiliza a base de dados gráfica **Neo4j** para armazenar informações essenciais sobre o Instituto, como contactos e cursos, bem como dados específicos dos utilizadores, como informações pessoais e horários dos cursos. Isto permite que o sistema forneça respostas contextuais e personalizadas.
-- **Modelos de Linguagem**: Integrado com a **API do Ollama** para utilizar modelos de linguagem avançados, oferecendo respostas precisas e relevantes às questões dos utilizadores.
+- **User Interface**: Developed with **Streamlit**, providing an interactive and user-friendly interface.
+- **Backend**: Managed by **FastAPI**, ensuring fast and efficient communication between system components.
+- **Database**: Uses the **Neo4j** graph database to store essential information about the institute, such as contacts and courses, as well as user-specific data, such as personal information and class schedules. This allows the system to provide contextual and personalized responses.
+- **Language Models**: Integrated with the **Ollama API** to use advanced language models, offering precise and relevant answers to user queries.
 
-## Clonar o Repositório do PyaGPT
+## Clone the PyaGPT Repository
 
-Para obter o código-fonte do projeto PyaGPT, execute o seguinte comando na sua shell:
+To get the source code of the PyaGPT project, execute the following command in your shell:
 
 ```bash
 git clone https://github.com/gui-gaspar/PyaGPT
 ```
 
-## Instalação dos Modelos Ollama
+## Install Ollama Models
 
-Os modelos da Ollama devem ser instalados previamente para garantir o correto funcionamento do PyaGPT. Recomendamos a instalação dos seguintes modelos:
+The Ollama models must be installed beforehand to ensure PyaGPT works correctly. We recommend installing the following models:
 
-- [**Llama 3.1**](https://ollama.com/library/llama3.1): Para interações gerais no chat.
-- [**Llava**](https://ollama.com/library/llava): Para análise de imagens e PDFs.
+- [**Llama 3.1**](https://ollama.com/library/llama3.1): For general chat interactions.
+- [**Llava**](https://ollama.com/library/llava): For image and PDF analysis.
 
-### Comandos de Instalação:
+### Installation Commands:
 
-Para instalar os modelos, utilize os seguintes comandos:
+To install the models, use the following commands:
 
 ```bash
 ollama run llama3.1
 ollama run llava
 ```
 
-Após a instalação, localize o diretório onde os modelos foram instalados no seu sistema:
+After installation, locate the directory where the models were installed on your system:
 
-- **Windows**: `C:\Users\USER\.ollama\models` (substitua "USER" pelo nome do seu utilizador).
+- **Windows**: `C:\Users\USER\.ollama\models` (replace "USER" with your username).
 - **Linux**: `/usr/share/ollama/.ollama/models`
 
-Copie as pastas `blobs` e `manifests` para o diretório do projeto, em `ollama\models`. Este diretório deve ser criado na raiz do projeto PyaGPT, caso ainda não exista. Esta etapa é essencial para que o modelo seja corretamente carregado durante a execução do projeto.
+Copy the `blobs` and `manifests` folders to the project directory under `ollama\models`. This directory should be created at the root of the PyaGPT project if it does not exist. This step is essential for the models to be loaded correctly during execution.
 
-## Execução do Projeto
+## Run the Project
 
-Para executar o PyaGPT, siga um dos seguintes procedimentos:
+To run PyaGPT, follow one of the procedures below:
 
-1. No diretório principal do projeto, execute o comando:
+1. In the main project directory, execute:
    ```bash
    docker-compose up --build
    ```
 
-2. Alternativamente, utilize o script localizado na `root` do projeto:
+2. Alternatively, use the script located at the `root` of the project:
    ```bash
    run_docker.bat
    ```
 
-## Importar dados para a Base de Dados Neo4j
+## Import Data into the Neo4j Database
 
-Os dados do Neo4j devem ser carregados utilizando os scripts SQL disponíveis na pasta `sql`:
+The Neo4j data should be loaded using the SQL scripts available in the `sql` folder: 
 
 1. `importar_dados.sql`
 2. `importar_relacoes.sql`
 
-Apenas é necessário copiar o seu conteúdo para a `prompt` do Neo4j para serem importados todos os dados referentes ao Instituto Piaget e informações pessoais dos utilizadores.
+Simply copy their content into the Neo4j `prompt` to import all data related to Instituto Piaget and user-specific information.
