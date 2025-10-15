@@ -19,19 +19,19 @@ The following diagram shows the architecture of the PyaGPT system:
 ### PyaGPT Chatbot (Llama 3.1 Model)
 Interact with the PyaGPT chatbot to get contextual answers about Instituto Piaget:
 
-![Chatbot Example](images/pyagpt_example.png)
+![Chatbot Example](img/pyagpt_example.png)
 
 ### PyaGPT Multimodal Analysis (Llava Model)
 
 #### Image Analysis
 Analyze images and receive descriptive output from the model:
 
-![Multimodal Image Example](images/multimodal_img_example.png)
+![Multimodal Image Example](img/multimodal_img_example.png)
 
 #### PDF Analysis
 Extract text or summarize content from PDFs:
 
-![Multimodal PDF Example](images/multimodal_pdf_example.png)
+![Multimodal PDF Example](img/multimodal_pdf_example.png)
 
 
 ## How to Use PyaGPT
