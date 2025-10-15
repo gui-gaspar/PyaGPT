@@ -12,5 +12,8 @@
 /ollama/models/*
 !/ollama/models/.gitignore
 
+# Ignore img folder
+/img/
+
 .git/
 backup/*
