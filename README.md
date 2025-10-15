@@ -13,23 +13,25 @@ The following diagram shows the architecture of the PyaGPT system:
 - **Database**: Uses the **Neo4j** graph database to store essential information about the institute, such as contacts and courses, as well as user-specific data, such as personal information and class schedules. This allows the system to provide contextual and personalized responses.
 - **Language Models**: Integrated with the **Ollama API** to use advanced language models, offering precise and relevant answers to user queries.
 
-## Example Usage: PyaGPT
+## Demonstration
 
-Below is an example of the PyaGPT chatbot in action:
+### PyaGPT Chatbot (Llama 3.1 Model)
+Interact with the PyaGPT chatbot to get contextual answers about Instituto Piaget:
 
 ![Chatbot Example](images/pyagpt_example.png)
 
-## Example Usage: Multimodal Model
+### PyaGPT Multimodal Analysis (Llava Model)
 
-### Image Analysis
-The multimodal model can analyze images and provide descriptions. Example:
+#### Image Analysis
+Analyze images and receive descriptive output from the model:
 
 ![Multimodal Image Example](images/multimodal_img_example.png)
 
-### PDF Analysis
-It can also analyze PDFs and extract information. Example:
+#### PDF Analysis
+Extract text or summarize content from PDFs:
 
 ![Multimodal PDF Example](images/multimodal_pdf_example.png)
+
 
 ## How to Use PyaGPT
 
