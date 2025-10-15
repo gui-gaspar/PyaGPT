@@ -98,6 +98,6 @@ The project is now ready to run! 🚀 Feel free to explore PyaGPT, test its feat
 
 Response times from the models may vary depending on your computer’s performance and available resources. Some queries, especially those involving multimodal inputs like images or PDFs, may take a few extra seconds to process. Please be patient while PyaGPT generates the response.
 
-![Loading GIF](images/pyagpt_loading.gif)
+![Loading GIF](img/pyagpt_loading.gif)
 
 
