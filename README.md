@@ -5,7 +5,6 @@ The **PyaGPT** project is an innovative application that leverages various techn
 ## Architecture
 
 The following diagram shows the architecture of the PyaGPT system:
-
 ![PyaGPT Architecture](img/pyagpt_architecture.png)
 
 ## Technologies 
