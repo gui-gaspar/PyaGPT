@@ -15,5 +15,8 @@
 # Ignore img folder
 /img/
 
+# Ignore video folder
+/video_demos/
+
 .git/
 backup/*
