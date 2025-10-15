@@ -6,7 +6,6 @@ The **PyaGPT** project is an innovative application that leverages various techn
 
 The following diagram shows the architecture of the PyaGPT system:
 ![PyaGPT Architecture](img/pyagpt_architecture.png)
-
 ## Technologies 
 
 - **User Interface**: Developed with **Streamlit**, providing an interactive and user-friendly interface.
