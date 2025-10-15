@@ -19,7 +19,7 @@ The following diagram shows the architecture of the PyaGPT system:
 ### PyaGPT Chatbot (Llama 3.1 Model)
 Interact with the PyaGPT chatbot to get contextual answers about Instituto Piaget:
 
-![Chatbot Example](img/pyagpt_example.png)
+![Chatbot Example](img/pyagpt_chatbot_example.png)
 
 ### PyaGPT Multimodal Analysis (Llava Model)
 
