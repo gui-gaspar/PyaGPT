@@ -1,6 +1,7 @@
 # PyaGPT - Virtual Assistant of Instituto Piaget
 
-The **PyaGPT** project is an innovative application that leverages various technologies to create a virtual assistant specialized in providing information about Instituto Piaget. The user interface is developed using Streamlit, while the backend is managed by FastAPI, ensuring efficient communication between the system's components. The Neo4j graph database stores all essential information about the institute, such as contacts and courses, as well as user-specific data, like personal information and class schedules, allowing for contextual and personalized responses. Integration with the Ollama API enables the use of advanced language models to answer user queries more accurately and relevantly. PyaGPT is thus an interactive, easy-to-use, and efficient tool, ideal for facilitating access to institutional information about Piaget.
+🚀 The **PyaGPT** project is an innovative application that leverages various technologies to create a virtual assistant 🤖 specialized in providing information about Instituto Piaget. The user interface is developed using **Streamlit** 💻, while the backend is managed by **FastAPI** ⚡, ensuring efficient communication between the system's components. The **Neo4j** graph database 🗄️ stores all essential information about the institute, such as contacts and courses, as well as user-specific data, like personal information and class schedules 📝, allowing for contextual and personalized responses. Integration with the **Ollama API** enables the use of advanced language models 💡 to answer user queries more accurately and relevantly. PyaGPT is thus an interactive, easy-to-use, and efficient tool, ideal for facilitating access to institutional information about Piaget.
+
 
 ## Architecture
 
@@ -8,10 +9,10 @@ The following diagram shows the architecture of the PyaGPT system:
 ![PyaGPT Architecture](img/pyagpt_architecture.png)
 ## Technologies 
 
-- **User Interface**: Developed with **Streamlit**, providing an interactive and user-friendly interface.
-- **Backend**: Managed by **FastAPI**, ensuring fast and efficient communication between system components.
-- **Database**: Uses the **Neo4j** graph database to store essential information about the institute, such as contacts and courses, as well as user-specific data, such as personal information and class schedules. This allows the system to provide contextual and personalized responses.
-- **Language Models**: Integrated with the **Ollama API** to use advanced language models, offering precise and relevant answers to user queries.
+- **User Interface** 💻: Developed with **Streamlit**, providing an interactive and user-friendly interface.  
+- **Backend** ⚡: Managed by **FastAPI**, ensuring fast and efficient communication between system components.  
+- **Database** 🗄️: Uses the **Neo4j** graph database to store essential information about the institute, such as contacts and courses, as well as user-specific data, like personal information and class schedules. This allows the system to provide contextual and personalized responses.  
+- **Language Models** 🤖💡: Integrated with the **Ollama API** to use advanced language models, offering precise and relevant answers to user queries.
 
 ## Demonstration
 
@@ -88,3 +89,16 @@ The Neo4j data should be loaded using the SQL scripts available in the `sql` fol
 2. `importar_relacoes.sql`
 
 Simply copy their content into the Neo4j `prompt` to import all data related to Instituto Piaget and user-specific information.
+
+### Note
+
+Response times from the models may vary depending on your computer’s performance and available resources. Some queries, especially those involving multimodal inputs like images or PDFs, may take a few extra seconds to process. Please be patient while PyaGPT generates the response.
+
+![Loading GIF](images/pyagpt_loading.gif)
+
+
+## Try It Out
+
+The project is now ready to run! 🚀 Feel free to explore PyaGPT, test its features, and share any suggestions or report bugs. 📝 Your feedback is greatly appreciated and helps improve the project for everyone. 💡
+
+
