@@ -90,15 +90,14 @@ The Neo4j data should be loaded using the SQL scripts available in the `sql` fol
 
 Simply copy their content into the Neo4j `prompt` to import all data related to Instituto Piaget and user-specific information.
 
-### Note
+## Try It Out
+
+The project is now ready to run! 🚀 Feel free to explore PyaGPT, test its features, and share any suggestions or report bugs. 📝 Your feedback is greatly appreciated and helps improve the project for everyone. 💡
+
+## Note
 
 Response times from the models may vary depending on your computer’s performance and available resources. Some queries, especially those involving multimodal inputs like images or PDFs, may take a few extra seconds to process. Please be patient while PyaGPT generates the response.
 
 ![Loading GIF](images/pyagpt_loading.gif)
-
-
-## Try It Out
-
-The project is now ready to run! 🚀 Feel free to explore PyaGPT, test its features, and share any suggestions or report bugs. 📝 Your feedback is greatly appreciated and helps improve the project for everyone. 💡
 
 
